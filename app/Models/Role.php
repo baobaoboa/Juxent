@@ -11,14 +11,11 @@ class Role extends Model
 
     use HasFactory;
 
-    const SUPER_ADMINISTRATOR_ID = 1;
-    const ADMINISTRATOR_ID = 2;
-    const SELLER_ID = 3;
+
 
     protected $fillable = [
         'name',
-        'slug',
-        'description'
+        'description',
     ];
 
     /**
@@ -28,7 +25,6 @@ class Role extends Model
      */
     protected $hidden = [
         'id',
-        'slug',
         'deleted_at',
         'created_at',
         'updated_at',

@@ -15,55 +15,25 @@ class AuthController extends Controller
 
     public function register(Request $request){
         $fields = $request->validate([
-            'last_name' => 'required|string',
             'first_name' => 'required|string',
+            'middle_name' => 'required|string',
+            'last_name' => 'required|string',
+            'role_id' => 'required|integer',
             'username' => 'required|string|unique:users,username',
-            'contact_number' => 'required|string|unique:users,contact_number',
+            'birthday' => 'required|date',
             'email' => 'required|string|unique:users,email',
             'password' => 'required|string|confirmed|min:8',
-            'street' => 'required|string',
-            'address_line_2' => '',
-            'barangay' => 'required|string',
-            'city' => 'required|string',
-            'region' => 'required|string',
-            'country' => 'required|string',
-            'zipcode' => 'required|integer'
         ]);
-
-        $address = Address::create([
-            'street' => $fields['street'],
-            'address_line_2' => $fields['address_line_2'],
-            'barangay' => $fields['barangay'],
-            'city' => $fields['city'],
-            'region' => $fields['region'],
-            'country' => $fields['country'],
-            'zipcode' => $fields['zipcode']
-        ]);
-        //slug create
-        $userSlug = str_replace(" ", "-",strtoupper($fields['username']));
         $user = User::create([
-            'last_name' => $fields['last_name'],
             'first_name' => $fields['first_name'],
+            'middle_name' => $fields['middle_name'],
+            'last_name' => $fields['last_name'],
+            'role_id' => $fields['role_id'],
             'username' => $fields['username'],
-            'contact_number' => $fields['contact_number'],
-            'slug' => $userSlug,
+            'birthday' => $fields['birthday'],
             'email' => $fields['email'],
             'password' => bcrypt($fields['password']),
-            'role_id' => $fields['role_id'],
-            'address_id' => $address->id,
         ]);
-
-        if($fields['role_id'] == 2){
-            DB::table('wallets')->insert([
-                ['seller_id' => $user->id, 'money' => 0],
-            ]);
-        }
-
-        //adding role info
-        $role = DB::select('SELECT name FROM `roles` WHERE id=?', [$user->role_id]);
-        $user->role = $role[0]->name;
-        //adding address key
-        $user->address = $address;
 
         $token = $user->createToken('userToken')->plainTextToken;
         $response =[
@@ -110,11 +80,7 @@ class AuthController extends Controller
         ];
     }
     public function profile(Request $request){
-        auth()->user()->role->slug;
-        auth()->user()->address;
-        unset(Auth::user()->id);
-
-        Auth::user()->avatar = env('APP_URL').Storage::disk('local')->url('app/'). Auth::user()->avatar;
+        auth()->user()->role;
         return Auth::user();
     }
 }

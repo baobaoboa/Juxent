@@ -33,6 +33,11 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
 
+            Route::middleware('api')
+                ->prefix('api')
+                ->group(base_path('routes/api/auth/auth.php'));
+
+
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
         });
@@ -45,7 +50,15 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function configureRateLimiting()
     {
+        RateLimiter::for('verifyUser', function (Request $request) {
+            return Limit::perMinute(80 )->by($request->user()?->id ?: $request->ip());
+        });
         RateLimiter::for('api', function (Request $request) {
+            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
+        });
+
+        //create function for every page want to rate limit
+        RateLimiter::for('products', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
     }

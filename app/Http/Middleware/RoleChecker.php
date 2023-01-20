@@ -13,14 +13,10 @@ class RoleChecker
     public function handle($request, Closure $next, ...$roles)
     {
         foreach($roles as $role) {
-            if(auth()->user()->role->slug == $role){
+            if(auth()->user()->role->name == $role){
                 return $next($request);
             }
         }
-        /*
-    foreach($roles as $test){
-        echo $test;
-    }*/
         //echo auth()->user()->role->slug;
         $this->throwException('401', 'Unauthorized Access' );
     }
