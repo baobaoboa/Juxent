@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/default_padding_margin"
+    tools:ignore="HardCodedText">
+
+    <TextView
+        android:id="@+id/tv_SelectedText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selected:"
+        android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_Selected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_padding_margin"
+        android:text="0"
+        android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_SelectedText"
+        app:layout_constraintStart_toEndOf="@+id/tv_SelectedText"
+        app:layout_constraintTop_toTopOf="@+id/tv_SelectedText" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/btn_DeselectAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0"
+        android:foreground="?attr/actionBarItemBackground"
+        android:padding="@dimen/default_padding_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_SelectAll"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Full"
+        app:srcCompat="@drawable/deselect_24"
+        app:tint="?attr/colorOnSurfaceVariant" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/btn_SelectAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0"
+        android:foreground="?attr/actionBarItemBackground"
+        android:padding="@dimen/default_padding_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_Download"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Full"
+        app:srcCompat="@drawable/select_all_24"
+        app:tint="?attr/colorOnSurfaceVariant" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/btn_Download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0"
+        android:foreground="?attr/actionBarItemBackground"
+        android:padding="@dimen/default_padding_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Full"
+        app:srcCompat="@drawable/download_24"
+        app:tint="?attr/colorOnSurfaceVariant" />
+</androidx.constraintlayout.widget.ConstraintLayout>

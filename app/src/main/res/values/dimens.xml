@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    COMMON SIZES    -->
+    <dimen name="default_dialog_round_corner_small">2dp</dimen>
+    <dimen name="default_dialog_round_corner">4dp</dimen>
+    <dimen name="default_dialog_round_corner_large">8dp</dimen>
+
+    <dimen name="default_padding_margin_x_small">2dp</dimen>
+    <dimen name="default_padding_margin_small">4dp</dimen>
+    <dimen name="default_padding_margin">8dp</dimen>
+    <dimen name="default_padding_margin_large">16dp</dimen>
+    <dimen name="default_padding_margin_x_large">24dp</dimen>
+    <dimen name="default_padding_margin_xx_large">32dp</dimen>
+    <dimen name="default_padding_margin_xxx_large">48dp</dimen>
+    <dimen name="default_padding_margin_colossal">64dp</dimen>
+
+    <dimen name="default_icon_size_x_small">12dp</dimen>
+    <dimen name="default_icon_size_small">16dp</dimen>
+    <dimen name="default_icon_size">24dp</dimen>
+    <dimen name="default_icon_size_large">36dp</dimen>
+    <dimen name="default_icon_size_x_large">48dp</dimen>
+    <dimen name="default_icon_size_xx_large">56dp</dimen>
+
+    <dimen name="default_display_image_size">120dp</dimen>
+
+    <dimen name="default_stroke_small">1dp</dimen>
+    <dimen name="default_stroke">2dp</dimen>
+    <dimen name="default_stroke_large">3dp</dimen>
+
+    <dimen name="default_divider_size">1dp</dimen>
+    <dimen name="default_divider_size_large">2dp</dimen>
+</resources>

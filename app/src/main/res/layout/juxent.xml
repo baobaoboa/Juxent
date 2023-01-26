@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Juxent"
+    tools:ignore="HardCodedText">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|enterAlways">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@drawable/menu_24"
+                app:navigationIconTint="?attr/colorOnSurface">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/btn_Notification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="@dimen/default_padding_margin"
+                    android:clickable="true"
+                    android:foreground="?attr/actionBarItemBackground"
+                    android:padding="@dimen/default_padding_margin"
+                    app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Full"
+                    app:srcCompat="@drawable/notifications_24"
+                    app:tint="?attr/colorOnSurface" />
+            </com.google.android.material.appbar.MaterialToolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottomSheet"
+            style="@style/Widget.Material3.BottomSheet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/default_padding_margin_large"
+            android:paddingTop="@dimen/default_padding_margin"
+            android:paddingEnd="@dimen/default_padding_margin_large"
+            android:paddingBottom="@dimen/default_padding_margin"
+            app:behavior_peekHeight="0dp"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+            <TextView
+                android:id="@+id/tv_SelectedText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Selected:"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_Selected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_padding_margin"
+                android:text="0"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_SelectedText"
+                app:layout_constraintStart_toEndOf="@+id/tv_SelectedText"
+                app:layout_constraintTop_toTopOf="@+id/tv_SelectedText" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/btn_DeselectAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0"
+                android:clickable="true"
+                android:foreground="?attr/actionBarItemBackground"
+                android:padding="@dimen/default_padding_margin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_SelectAll"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Full"
+                app:srcCompat="@drawable/deselect_24"
+                app:tint="?attr/colorOnSurfaceVariant" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/btn_SelectAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/default_padding_margin"
+                android:layout_weight="0"
+                android:clickable="true"
+                android:foreground="?attr/actionBarItemBackground"
+                android:padding="@dimen/default_padding_margin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_Download"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Full"
+                app:srcCompat="@drawable/select_all_24"
+                app:tint="?attr/colorOnSurfaceVariant" />
+
+            <Button
+                android:id="@+id/btn_Download"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0"
+                android:padding="@dimen/default_padding_margin"
+                android:text="Export"
+                android:textAllCaps="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <!-- Your content goes here -->
+
+            <FrameLayout
+                android:id="@+id/frameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </FrameLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/header_drawer"
+        app:menu="@menu/juxent_drawer">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|top"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/default_padding_margin">
+
+            <ImageButton
+                android:id="@+id/btn_Back"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/default_padding_margin"
+                android:src="@drawable/back_24"
+                app:tint="?attr/colorOnSurface" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <Button
+                android:id="@+id/btn_Logout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/default_padding_margin_xx_large"
+                android:layout_marginBottom="@dimen/default_padding_margin_small"
+                android:layout_weight="1"
+                android:insetTop="@null"
+                android:insetBottom="@null"
+                android:text="Logout"
+                android:textAllCaps="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+                app:layout_constraintVertical_bias="0.0"
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Small" />
+        </LinearLayout>
+    </com.google.android.material.navigation.NavigationView>
+
+</androidx.drawerlayout.widget.DrawerLayout>

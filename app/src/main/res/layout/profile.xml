@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".Profile"
+    tools:ignore="HardCodedText, TextViewEdits">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/divider_space_surface_large"
+        android:orientation="vertical"
+        android:showDividers="middle|end">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_padding_margin_xxx_large"
+                app:cardBackgroundColor="?attr/colorSurface"
+                app:contentPadding="@dimen/default_padding_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.ExtraLarge"
+                app:strokeColor="?attr/colorOnSurface"
+                app:strokeWidth="@dimen/default_stroke">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_DisplayImage"
+                    android:layout_width="@dimen/default_display_image_size"
+                    android:layout_height="@dimen/default_display_image_size"
+                    app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.ExtraLarge"
+                    app:srcCompat="@drawable/ic_launcher_background" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/tv_Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_padding_margin_large"
+                android:layout_marginTop="@dimen/default_padding_margin_large"
+                android:layout_marginEnd="@dimen/default_padding_margin_large"
+                android:text="Name"
+                android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
+                android:textColor="?attr/colorOnSurface"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
+
+            <TextView
+                android:id="@+id/tv_CompanyPosition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_padding_margin_large"
+                android:layout_marginEnd="@dimen/default_padding_margin_large"
+                android:layout_marginBottom="@dimen/default_padding_margin_large"
+                android:text="Company Position"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:textColor="?attr/colorOnSurface"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_Name" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_padding_margin_large"
+            android:layout_marginEnd="@dimen/default_padding_margin_large"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
+            app:contentPadding="@dimen/default_padding_margin_large"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.ExtraLarge"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@drawable/divider_space_surfacevariant_small"
+                android:orientation="vertical"
+                android:showDividers="middle">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/default_icon_size"
+                        android:layout_height="@dimen/default_icon_size"
+                        android:layout_marginTop="@dimen/default_padding_margin_small"
+                        android:layout_marginBottom="@dimen/default_padding_margin_small"
+                        android:layout_weight="0"
+                        app:srcCompat="@drawable/cake_24"
+                        app:tint="?attr/colorOnSurfaceVariant" />
+
+                    <TextView
+                        android:id="@+id/tv_Birthdate"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/default_padding_margin_large"
+                        android:layout_weight="0"
+                        android:gravity="center_vertical"
+                        android:text="January 01, 2000 / 23 Years Old"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/default_icon_size"
+                        android:layout_height="@dimen/default_icon_size"
+                        android:layout_marginTop="@dimen/default_padding_margin_small"
+                        android:layout_marginBottom="@dimen/default_padding_margin_small"
+                        android:layout_weight="0"
+                        app:srcCompat="@drawable/phone_24"
+                        app:tint="?attr/colorOnSurfaceVariant" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/default_padding_margin_large"
+                        android:layout_weight="0"
+                        android:gravity="center_vertical"
+                        android:text="(+63) 9269999999"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_padding_margin_large"
+            android:layout_marginEnd="@dimen/default_padding_margin_large"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
+            app:contentPadding="@dimen/default_padding_margin_large"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.ExtraLarge"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@drawable/divider_space_surfacevariant_small"
+                android:orientation="vertical"
+                android:showDividers="middle">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/default_icon_size"
+                        android:layout_height="@dimen/default_icon_size"
+                        android:layout_marginTop="@dimen/default_padding_margin_small"
+                        android:layout_marginBottom="@dimen/default_padding_margin_small"
+                        android:layout_weight="0"
+                        app:srcCompat="@drawable/email_24"
+                        app:tint="?attr/colorOnSurfaceVariant" />
+
+                    <TextView
+                        android:id="@+id/tv_Email"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/default_padding_margin_large"
+                        android:layout_weight="0"
+                        android:gravity="center_vertical"
+                        android:text="sample@email.com"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/default_icon_size"
+                        android:layout_height="@dimen/default_icon_size"
+                        android:layout_marginTop="@dimen/default_padding_margin_small"
+                        android:layout_marginBottom="@dimen/default_padding_margin_small"
+                        android:layout_weight="0"
+                        app:srcCompat="@drawable/person_24"
+                        app:tint="?attr/colorOnSurfaceVariant" />
+
+                    <TextView
+                        android:id="@+id/tv_Username"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/default_padding_margin_large"
+                        android:layout_weight="0"
+                        android:gravity="center_vertical"
+                        android:text="Username"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/default_icon_size"
+                        android:layout_height="@dimen/default_icon_size"
+                        android:layout_marginTop="@dimen/default_padding_margin_small"
+                        android:layout_marginBottom="@dimen/default_padding_margin_small"
+                        android:layout_weight="0"
+                        app:srcCompat="@drawable/lock_24"
+                        app:tint="?attr/colorOnSurfaceVariant" />
+
+                    <TextView
+                        android:id="@+id/tv_Password"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/default_padding_margin_large"
+                        android:layout_weight="0"
+                        android:gravity="center_vertical"
+                        android:inputType="textPassword"
+                        android:text="Password"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

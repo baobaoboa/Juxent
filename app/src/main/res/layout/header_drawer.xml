@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/default_padding_margin_large"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_DisplayImage"
+        android:layout_width="@dimen/default_display_image_size"
+        android:layout_height="@dimen/default_display_image_size"
+        android:layout_marginTop="@dimen/default_padding_margin_colossal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.ExtraLarge"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
+    <TextView
+        android:id="@+id/tv_Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_padding_margin"
+        android:text="Name"
+        android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+        android:textColor="?attr/colorOnSurface"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/iv_DisplayImage" />
+
+    <TextView
+        android:id="@+id/tv_CompanyPosition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Company Position"
+        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+        android:textColor="?attr/colorOnSurface"
+        app:layout_constraintTop_toBottomOf="@+id/tv_Name" />
+</LinearLayout>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="HardcodedText">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/Dashboard"
+            android:icon="@drawable/home_24"
+            android:title="Dashboard"
+            android:checked="true"
+            android:checkable="true"/>
+        <item
+            android:id="@+id/Profile"
+            android:icon="@drawable/person_24"
+            android:title="Profile"
+            android:checkable="true"/>
+
+        <item android:title="Features">
+            <menu>
+                <item
+                    android:id="@+id/Sales_Report"
+                    android:icon="@drawable/sales_report_24"
+                    android:title="Sales Report"
+                    android:checkable="true"/>
+                <item
+                    android:id="@+id/Warranty"
+                    android:title="Warranty"
+                    android:icon="@drawable/warranty_24"
+                    android:checkable="true"/>
+                <item
+                    android:id="@+id/Reported_Issue"
+                    android:title="Reported Issue"
+                    android:icon="@drawable/reported_issue_24"
+                    android:checkable="true"/>
+                <item
+                    android:id="@+id/Teams"
+                    android:checkable="true"
+                    android:icon="@drawable/groups_24"
+                    android:title="Teams" />
+                <item
+                    android:id="@+id/Download"
+                    android:title="Download"
+                    android:icon="@drawable/download_24"
+                    android:checkable="true"/>
+            </menu>
+        </item>
+
+    </group>
+</menu>

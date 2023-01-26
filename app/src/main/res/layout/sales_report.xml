@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".Sales_Report"
+    tools:ignore="HardCodedText">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@drawable/divider_space_surface_large"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_padding_margin_large"
+            android:layout_marginEnd="@dimen/default_padding_margin_large"
+            android:layout_weight="0"
+            android:background="@null"
+            app:tabIndicator="@drawable/tab_indicator"
+            app:tabIndicatorAnimationMode="elastic"
+            app:tabIndicatorFullWidth="true"
+            app:tabIndicatorGravity="stretch"
+            app:tabRippleColor="@null"
+            app:tabSelectedTextColor="?attr/colorOnPrimary"
+            app:tabTextColor="?attr/colorOnSurface">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Single" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Range" />
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:padding="@dimen/default_padding_margin_large"
+            app:mcv_headerTextAppearance="@style/TextAppearance.Material3.TitleLarge"
+            app:mcv_selectionMode="single"
+            app:mcv_showOtherDates="out_of_range"
+            app:mcv_titleAnimationOrientation="horizontal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/page"
+            android:divider="@drawable/divider_space_surfacevariant_large"
+            android:orientation="vertical"
+            android:showDividers="middle">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_padding_margin_large"
+                android:layout_marginTop="@dimen/default_padding_margin_large"
+                android:layout_marginEnd="@dimen/default_padding_margin_large"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Reports"
+                    android:textAppearance="@style/TextAppearance.Material3.DisplaySmall"
+                    android:textColor="?attr/colorOnSurfaceVariant" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/btn_Add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/default_padding_margin_large"
+                    android:layout_weight="0"
+                    android:clickable="true"
+                    android:foreground="?attr/actionBarItemBackground"
+                    android:padding="@dimen/default_padding_margin"
+                    app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Full"
+                    app:srcCompat="@drawable/add_24"
+                    app:tint="?attr/colorOnSurfaceVariant" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
