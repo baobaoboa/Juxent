@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 class AuthController extends Controller
 {
 
-    /** <div style="font-size: 30px; font-weight: 700; font-family: Josefin sans;"> Temporary </div>
+    /** <div style="font-size: 3                                            0px; font-weight: 700; font-family: Josefin sans;"> Temporary </div>
      */
     public function register(Request $request){
         $fields = $request->validate([
