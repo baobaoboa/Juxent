@@ -1,7 +1,6 @@
-package com.taltos.juxent.extensions;
+package com.taltos.juxent.recyclerviews;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -35,8 +33,8 @@ public class RecyclerView_Sale extends RecyclerView.Adapter<RecyclerView_Sale.My
     private RecyclerView recyclerView;
 
     public RecyclerView_Sale(Activity mContext, List<Template_Sale> mData, RecyclerView recyclerView) {
-        this.mContext = mContext;
-        this.mData = mData;
+        this.mContext     = mContext;
+        this.mData        = mData;
         this.recyclerView = recyclerView;
 
         //    Bottom Sheet
@@ -145,7 +143,7 @@ public class RecyclerView_Sale extends RecyclerView.Adapter<RecyclerView_Sale.My
         }
 
         public MyViewHolder linkAdapter(RecyclerView_Sale adapter, Activity mContext) {
-            this.adapter = adapter;
+            this.adapter  = adapter;
             this.mContext = mContext;
             return this;
         }

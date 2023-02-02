@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".forms.Form_Teams"
+    tools:context=".forms.Form_Sales"
     tools:ignore="HardCodedText">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,14 +28,30 @@
             app:srcCompat="@drawable/close_24"
             app:tint="?attr/colorOnSurface" />
 
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/btn_Edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/default_padding_margin"
+            android:layout_marginEnd="@dimen/default_padding_margin"
+            android:clickable="true"
+            android:foreground="?attr/actionBarItemBackground"
+            android:padding="@dimen/default_padding_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Full"
+            app:srcCompat="@drawable/edit_24"
+            app:tint="?attr/colorOnSurface" />
+
         <TextView
-            android:id="@+id/NewEmployee"
+            android:id="@+id/tv_Id"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/default_padding_margin_large"
             android:layout_marginTop="@dimen/default_padding_margin_colossal"
             android:layout_marginEnd="@dimen/default_padding_margin_large"
-            android:text="New\nEmployee"
+            android:text="New\nSale / Client"
             android:textAppearance="@style/TextAppearance.Material3.DisplayLarge"
             android:textColor="?attr/colorOnBackground"
             app:layout_constraintEnd_toEndOf="parent"
@@ -44,7 +60,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:id="@+id/ll_Profile"
+            android:id="@+id/ll_Client"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/default_padding_margin_large"
@@ -58,13 +74,13 @@
             android:showDividers="middle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/NewEmployee">
+            app:layout_constraintTop_toBottomOf="@+id/tv_Id">
 
             <TextView
-                android:id="@+id/AboutYou"
+                android:id="@+id/ClientInformation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="About You"
+                android:text="Client Information"
                 android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
                 android:textColor="?attr/colorOnBackground" />
 
@@ -72,57 +88,44 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:endIconMode="clear_text"
-                app:startIconDrawable="@drawable/work_24">
+                app:startIconDrawable="@drawable/person_24">
 
-                <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                    android:id="@+id/actv_CompanyPosition"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tiet_Client"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:hint="Company Position"
-                    android:inputType="none" />
+                    android:layout_weight="1"
+                    android:hint="Client"
+                    android:inputType="textPersonName" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:endIconMode="clear_text"
-                app:startIconDrawable="@drawable/person_4_24">
+                app:startIconDrawable="@drawable/location_24">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tiet_FirstName"
+                    android:id="@+id/tiet_CompanyAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="First Name"
+                    android:hint="Company Address"
                     android:inputType="textPersonName" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="36dp"
-                app:endIconMode="clear_text">
+                app:endIconMode="clear_text"
+                app:prefixText="+63"
+                app:startIconDrawable="@drawable/contact_phone_24">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tiet_LastName"
+                    android:id="@+id/tiet_ContactPerson"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Last Name"
-                    android:inputType="textPersonName" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="36dp"
-                app:endIconMode="clear_text">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tiet_MiddleName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Middle Name"
+                    android:layout_weight="1"
+                    android:hint="Contact Person"
                     android:inputType="textPersonName" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -137,30 +140,15 @@
                     android:id="@+id/tiet_PhoneNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:hint="Phone Number"
                     android:inputType="phone"
                     android:maxLength="10" />
             </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:endIconMode="clear_text"
-                app:startIconDrawable="@drawable/cake_24">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tiet_Birthdate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:hint="Birthdate"
-                    android:inputType="none" />
-            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ll_Account"
+            android:id="@+id/ll_Product"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/default_padding_margin_large"
@@ -174,72 +162,138 @@
             android:showDividers="middle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ll_Profile">
+            app:layout_constraintTop_toBottomOf="@+id/ll_Client">
 
             <TextView
-                android:id="@+id/Account"
+                android:id="@+id/ProductInformation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Account"
+                android:text="Product Information"
                 android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
                 android:textColor="?attr/colorOnBackground" />
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_SoftwareType"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:endIconMode="clear_text"
-                app:startIconDrawable="@drawable/email_24">
+                app:startIconDrawable="@drawable/webhook_24">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tiet_Email"
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/actv_SoftwareType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Email"
-                    android:inputType="textEmailAddress" />
+                    android:layout_weight="1"
+                    android:completionThreshold="1"
+                    android:editable="false"
+                    android:hint="Software Type"
+                    android:inputType="none" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:endIconMode="clear_text"
-                app:startIconDrawable="@drawable/person_24">
+                app:startIconDrawable="@drawable/shopping_cart_24">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tiet_Username"
+                    android:id="@+id/tiet_ProductPurchased"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Username"
+                    android:hint="Product Purchased"
                     android:inputType="textPersonName" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:endIconMode="password_toggle"
-                app:startIconDrawable="@drawable/lock_24">
+                app:endIconMode="clear_text"
+                app:prefixText="+63"
+                app:startIconDrawable="@drawable/money_24">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tiet_Password"
+                    android:id="@+id/tiet_AmountPaid"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Password"
-                    android:inputType="textPassword" />
-
+                    android:layout_weight="1"
+                    android:hint="Amount Paid"
+                    android:inputType="numberDecimal"
+                    android:maxLength="10" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="36dp"
-                app:endIconMode="password_toggle">
+                app:endIconMode="clear_text"
+                app:prefixText="+63"
+                app:startIconDrawable="@drawable/payment_24">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tiet_ConfirmPassword"
+                    android:id="@+id/tiet_DatePaid"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Confirm Password"
-                    android:inputType="textPassword" />
+                    android:layout_weight="1"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="Date Paid"
+                    android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:endIconMode="clear_text"
+                app:prefixText="+63"
+                app:startIconDrawable="@drawable/delivery_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tiet_DateDelivered"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="Date Delivered"
+                    android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:endIconMode="clear_text"
+                app:prefixText="+63"
+                app:startIconDrawable="@drawable/receipt_long_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tiet_ORSI"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="Offiicial Receipt / Sales Invoice"
+                    android:inputType="none"
+                    android:tag="Official Receipt / Sales Invoice" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:endIconMode="clear_text"
+                app:prefixText="+63"
+                app:startIconDrawable="@drawable/receipt_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tiet_AR"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="Acknowledgement Receipt"
+                    android:inputType="none"
+                    android:tag="Acknowledgement Receipt" />
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
@@ -260,8 +314,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ll_Account"
+            app:layout_constraintTop_toBottomOf="@+id/ll_Product"
             app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Small" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.core.widget.NestedScrollView>

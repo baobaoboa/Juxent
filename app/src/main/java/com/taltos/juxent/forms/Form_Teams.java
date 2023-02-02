@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.datepicker.CalendarConstraints;
@@ -42,19 +44,16 @@ public class Form_Teams extends AppCompatActivity {
         setContentView(R.layout.form_teams);
 
         employee();
+        datePicker();
     }
 
     /** <span style="font-size: 50px; font-weight: bold;">EMPLOYEE</span> */
-    ImageView iv_DisplayImage;
     MaterialAutoCompleteTextView actv_CompanyPosition;
     TextInputEditText tiet_FirstName, tiet_LastName, tiet_MiddleName, tiet_Email, tiet_PhoneNumber,
             tiet_Birthdate, tiet_Username, tiet_Password, tiet_ConfirmPassword;
 
-    Uri uri_DisplayImage;
-
     private void employee() {
         //    Setting up components
-        iv_DisplayImage      = findViewById(R.id.iv_DisplayImage);
         actv_CompanyPosition = findViewById(R.id.actv_CompanyPosition);
 
         tiet_FirstName       = findViewById(R.id.tiet_FirstName);
@@ -73,10 +72,9 @@ public class Form_Teams extends AppCompatActivity {
 
         //    Adding listeners to components
         findViewById(R.id.btn_Exit).setOnClickListener(view -> onBackPressed());
-        findViewById(R.id.tiet_Birthdate).setOnClickListener(view -> datePicker(tiet_Birthdate));
         findViewById(R.id.btn_Create).setOnClickListener(view -> create());
 
-        iv_DisplayImage.setOnClickListener(view -> UploadImage());
+        tiet_Birthdate.setOnClickListener(view -> datePickerDialog(tiet_Birthdate));
     }
     private void create() {
         //    Save inputs
@@ -93,13 +91,6 @@ public class Form_Teams extends AppCompatActivity {
 
         //    Validate inputs
         {
-//            if (Objects.isNull(iv_DisplayImage.getTag())) {
-//                Toast.makeText(this, "Please insert a profile picture", Toast.LENGTH_SHORT).show();
-//                cv_Team.setStrokeWidth(2);
-//                cv_Team.requestFocus();
-//
-//                return;
-//            }
 //            if (TextUtils.isEmpty(companyPosition)) {
 //                actv_CompanyPosition.setError("Please choose a company position");
 //                actv_CompanyPosition.requestFocus();
@@ -176,18 +167,66 @@ public class Form_Teams extends AppCompatActivity {
 
         //    Module
         {
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, APIs.REGISTER,
-                    response -> {
-                        Toast.makeText(this, APIs.REGISTER, Toast.LENGTH_SHORT).show();
-                        Log.i("TEST", response);
+//            StringRequest stringRequest = new StringRequest(Request.Method.POST, APIs.REGISTER,
+//                    response -> {
+//                        Toast.makeText(this, APIs.REGISTER, Toast.LENGTH_SHORT).show();
+//                        Log.i("TEST", response);
+//
+//                        try {
+//                            JSONObject jsonObject = new JSONObject(response);
+//                            Log.i("MESSAGE", jsonObject.getString("message"));
+//                            Toast.makeText(this, "REGISTERED", Toast.LENGTH_SHORT).show();
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }, error -> Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show()) {
+//                @Override
+//                public Map<String, String> getHeaders() throws AuthFailureError {
+//                    Map<String, String> headers = new HashMap<>();
+//                    headers.put("Content-Type", "multipart/form-data");
+//                    return headers;
+//                }
+//
+//                @Override
+//                protected Map<String, String> getParams() throws AuthFailureError {
+//                    Map<String, String> params = new HashMap<>();
+//                    params.put("first_name", firstName);
+//                    params.put("middle_name", lastName);
+//                    params.put("last_name", middleName);
+//                    params.put("username", username);
+//                    params.put("email", email);
+//                    params.put("password", password);
+//                    params.put("password_confirmation", confirmPassword);
+//                    params.put("birthday", birthdate);
+//                    params.put("role_id", "1");
+//
+//                    return params;
+//                }
+//            };
+////            stringRequest.setRetryPolicy(new DefaultRetryPolicy(50000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+////            stringRequest.setShouldCache(false);
+//
+//            RequestHandler.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
 
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            Toast.makeText(this, "REGISTERED", Toast.LENGTH_SHORT).show();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }, error -> Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show()) {
+            StringRequest stringRequest= new StringRequest(Request.Method.POST, APIs.REGISTER, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+
+                    try {
+                        Log.i("RESPONSE", "["+response+"]");
+                        JSONObject jsonObject = new JSONObject(response);
+                        Toast.makeText(getApplicationContext(), "WORKS" , Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }){
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     Map<String, String> headers = new HashMap<>();
@@ -195,6 +234,7 @@ public class Form_Teams extends AppCompatActivity {
                     return headers;
                 }
 
+                @Nullable
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<>();
@@ -211,54 +251,30 @@ public class Form_Teams extends AppCompatActivity {
                     return params;
                 }
             };
-            stringRequest.setRetryPolicy(new DefaultRetryPolicy(50000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-            stringRequest.setShouldCache(false);
 
             RequestHandler.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
         }
     }
 
     /** <span style="font-size: 50px; font-weight: bold;">DATE</span> */
-    private void datePicker(TextInputEditText date) {
-        CalendarConstraints.DateValidator dateValidator = DateValidatorPointBackward.now();
-        CalendarConstraints.Builder constraintsBuilder  = new CalendarConstraints.Builder();
+    CalendarConstraints.DateValidator dateValidator;
+    CalendarConstraints.Builder constraintsBuilder;
+    MaterialDatePicker.Builder materialDateBuilder;
+    MaterialDatePicker materialDatePicker;
+
+    private void datePicker() {
+        dateValidator      = DateValidatorPointBackward.now();
+        constraintsBuilder = new CalendarConstraints.Builder();
         constraintsBuilder.setValidator(dateValidator);
 
-        MaterialDatePicker.Builder materialDateBuilder = MaterialDatePicker.Builder.datePicker();
+        materialDateBuilder = MaterialDatePicker.Builder.datePicker();
         materialDateBuilder.setCalendarConstraints(constraintsBuilder.build());
-        materialDateBuilder.setTitleText("SELECT YOUR BIRTHDATE");
+        materialDateBuilder.setTitleText("SELECT DATE");
 
-        final MaterialDatePicker materialDatePicker = materialDateBuilder.build();
+        materialDatePicker = materialDateBuilder.build();
+    }
+    private void datePickerDialog(TextInputEditText date) {
         materialDatePicker.show(getSupportFragmentManager(), "MATERIAL_DATE_PICKER");
         materialDatePicker.addOnPositiveButtonClickListener(selection -> date.setText(materialDatePicker.getHeaderText()));
-    }
-
-    /** <span style="font-size: 50px; font-weight: bold;">IMAGE</span> */
-    public void UploadImage() {
-        iv_DisplayImage.setOnClickListener(view -> {
-            ImagePicker.Companion.with(this)
-                    .galleryOnly()
-                    .cropSquare()
-                    .compress(1024) // Final image size will be less than 1 MB (Optional)
-                    .maxResultSize(1080, 1080) // Final image resolution will be less than
-                    // 1080 x 1080 (Optional)
-                    .start(1);
-        });
-    }
-
-    /** <span style="font-size: 50px; font-weight: bold;">OVERRIDE</span> */
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 1) {
-            uri_DisplayImage = data.getData();
-            iv_DisplayImage.setImageURI(uri_DisplayImage);
-            iv_DisplayImage.setTag(uri_DisplayImage);
-
-            if (Objects.isNull(iv_DisplayImage.getTag())) {
-                iv_DisplayImage.setImageDrawable(getResources().getDrawable(R.drawable.ic_launcher_background));
-            }
-        }
     }
 }

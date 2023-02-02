@@ -49,7 +49,8 @@
                 android:layout_marginTop="@dimen/default_padding_margin_large"
                 android:layout_marginEnd="@dimen/default_padding_margin_large"
                 android:text="Name"
-                android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
                 android:textColor="?attr/colorOnSurface"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -112,7 +113,7 @@
                         android:layout_weight="0"
                         android:gravity="center_vertical"
                         android:text="January 01, 2000 / 23 Years Old"
-                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                         android:textColor="?attr/colorOnSurfaceVariant" />
                 </LinearLayout>
 
@@ -137,7 +138,7 @@
                         android:layout_weight="0"
                         android:gravity="center_vertical"
                         android:text="(+63) 9269999999"
-                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                         android:textColor="?attr/colorOnSurfaceVariant" />
                 </LinearLayout>
             </LinearLayout>
@@ -183,7 +184,7 @@
                         android:layout_weight="0"
                         android:gravity="center_vertical"
                         android:text="sample@email.com"
-                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                         android:textColor="?attr/colorOnSurfaceVariant" />
                 </LinearLayout>
 
@@ -209,7 +210,7 @@
                         android:layout_weight="0"
                         android:gravity="center_vertical"
                         android:text="Username"
-                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                         android:textColor="?attr/colorOnSurfaceVariant" />
                 </LinearLayout>
 
@@ -236,7 +237,7 @@
                         android:gravity="center_vertical"
                         android:inputType="textPassword"
                         android:text="Password"
-                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                         android:textColor="?attr/colorOnSurfaceVariant" />
                 </LinearLayout>
 

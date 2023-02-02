@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -51,7 +52,7 @@ public class Juxent extends AppCompatActivity {
         replaceFragment(new Dashboard());
 
         findViewById(R.id.btn_Back).setOnClickListener(view -> drawerLayout.closeDrawers());
-        findViewById(R.id.btn_Notification).setOnClickListener(view -> Toast.makeText(this, "Notification", Toast.LENGTH_SHORT).show());
+        findViewById(R.id.btn_Notification).setOnClickListener(view -> startActivity(new Intent(this, Notification.class)));
 
         navigationView.setNavigationItemSelectedListener(menuItem -> {
             //    Close drawer
