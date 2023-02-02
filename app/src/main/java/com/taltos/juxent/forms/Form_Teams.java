@@ -32,6 +32,7 @@ import com.taltos.juxent.extensions.RequestHandler;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -167,29 +168,43 @@ public class Form_Teams extends AppCompatActivity {
 
         //    Module
         {
-//            StringRequest stringRequest = new StringRequest(Request.Method.POST, APIs.REGISTER,
-//                    response -> {
-//                        Toast.makeText(this, APIs.REGISTER, Toast.LENGTH_SHORT).show();
-//                        Log.i("TEST", response);
-//
-//                        try {
-//                            JSONObject jsonObject = new JSONObject(response);
-//                            Log.i("MESSAGE", jsonObject.getString("message"));
-//                            Toast.makeText(this, "REGISTERED", Toast.LENGTH_SHORT).show();
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }, error -> Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show()) {
+//            StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.1.21:8000/api/register", new Response.Listener<String>() {
 //                @Override
-//                public Map<String, String> getHeaders() throws AuthFailureError {
-//                    Map<String, String> headers = new HashMap<>();
-//                    headers.put("Content-Type", "multipart/form-data");
-//                    return headers;
+//                public void onResponse(String response) {
+//                    Log.i("RESPONSE", response);
+//                    try {
+//                        JSONObject jsonObject = new JSONObject(response);
+//                        Log.i("MESSAGE", jsonObject.getString("message"));
+//                        Toast.makeText(Form_Teams.this, "REGISTERED", Toast.LENGTH_SHORT).show();
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
 //                }
+//            }, new Response.ErrorListener() {
+//                @Override
+//                public void onErrorResponse(VolleyError error) {
+////                    Toast.makeText(Form_Teams.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+//                    try {
+//                        String responseBody = new String(error.networkResponse.data, "utf-8");
+//                        Log.i("RESPONSE_BODY", responseBody);
+//                    } catch (UnsupportedEncodingException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }) {
+////                @Override
+////                public Map<String, String> getHeaders() throws AuthFailureError {
+////                    Map<String, String> headers = new HashMap<>();
+////                    headers.put("Content-Type", "multipart/form-data");
+////                    return super.getHeaders();
+////                }
 //
+//                @Nullable
 //                @Override
 //                protected Map<String, String> getParams() throws AuthFailureError {
 //                    Map<String, String> params = new HashMap<>();
+//                    params.put("Content-Type", "application/json");
+//                    params.put("Accept", "application/json");
 //                    params.put("first_name", firstName);
 //                    params.put("middle_name", lastName);
 //                    params.put("last_name", middleName);
@@ -197,47 +212,42 @@ public class Form_Teams extends AppCompatActivity {
 //                    params.put("email", email);
 //                    params.put("password", password);
 //                    params.put("password_confirmation", confirmPassword);
-//                    params.put("birthday", birthdate);
+//                    params.put("birthday", "2002-03-03");
 //                    params.put("role_id", "1");
-//
-//                    return params;
+//                    return super.getParams();
 //                }
 //            };
-////            stringRequest.setRetryPolicy(new DefaultRetryPolicy(50000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-////            stringRequest.setShouldCache(false);
-//
-//            RequestHandler.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
 
-            StringRequest stringRequest= new StringRequest(Request.Method.POST, APIs.REGISTER, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.1.21:8000/api/register",
+                    response -> {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            Log.i("MESSAGE", jsonObject.getString("message"));
+                            Toast.makeText(this, "REGISTERED", Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }, error -> {
                     try {
-                        Log.i("RESPONSE", "["+response+"]");
-                        JSONObject jsonObject = new JSONObject(response);
-                        Toast.makeText(getApplicationContext(), "WORKS" , Toast.LENGTH_SHORT).show();
-                    } catch (JSONException e) {
+                        String responseBody = new String(error.networkResponse.data, "utf-8");
+                        Log.i("RESPONSE_BODY", responseBody);
+                    } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
-
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }){
+            }) {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     Map<String, String> headers = new HashMap<>();
-                    headers.put("Content-Type", "multipart/form-data");
+//                    headers.put("Content-Type", "multipart/form-data");
+                    headers.put("Accept", "application/json");
                     return headers;
                 }
 
-                @Nullable
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<>();
+//                    params.put("Content-Type", "multipart/form-data");
+//                    params.put("Accept", "application/json");
                     params.put("first_name", firstName);
                     params.put("middle_name", lastName);
                     params.put("last_name", middleName);
@@ -245,12 +255,14 @@ public class Form_Teams extends AppCompatActivity {
                     params.put("email", email);
                     params.put("password", password);
                     params.put("password_confirmation", confirmPassword);
-                    params.put("birthday", birthdate);
+                    params.put("birthday", "2002-03-03");
                     params.put("role_id", "1");
 
                     return params;
                 }
             };
+            stringRequest.setRetryPolicy(new DefaultRetryPolicy(50000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            stringRequest.setShouldCache(false);
 
             RequestHandler.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
         }
