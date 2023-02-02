@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-use function PHPUnit\Framework\isEmpty;
 
 class AuthController extends Controller
 {
@@ -17,7 +16,7 @@ class AuthController extends Controller
     /** <div style="font-size: 3                                            0px; font-weight: 700; font-family: Josefin sans;"> Temporary </div>
      */
     public function register(Request $request){
-        /*$fields = $request->validate([
+        $fields = $request->validate([
             'first_name' => 'required|string',
             'middle_name' => 'required|string',
             'last_name' => 'required|string',
@@ -36,34 +35,25 @@ class AuthController extends Controller
             'birthday' => $fields['birthday'],
             'email' => $fields['email'],
             'password' => bcrypt($fields['password']),
+        ]);
+        /*
+        $user = User::create([
+            'first_name' => $request['first_name'],
+            'middle_name' => $request['middle_name'],
+            'last_name' => $request['last_name'],
+            'role_id' => $request['role_id'],
+            'username' => $request['username'],
+            'birthday' => $request['birthday'],
+            'email' => $request['email'],
+            'password' => bcrypt($request['password']),
         ]);*/
-        $response = DB::table('users')
-            ->where('username', '=',$request['username'])
-            ->orWhere('email', '=', $request['email'])
-            ->get();
-        if(isEmpty($response)){
-            return response("Error!", 201);
-        }
-        else {
-            $user = User::create([
-                'first_name' => $request['first_name'],
-                'middle_name' => $request['middle_name'],
-                'last_name' => $request['last_name'],
-                'role_id' => $request['role_id'],
-                'username' => $request['username'],
-                'birthday' => $request['birthday'],
-                'email' => $request['email'],
-                'password' => bcrypt($request['password']),
-            ]);
 
-
-            $token = $user->createToken('userToken')->plainTextToken;
-            $response =[
-                'user' => $user,
-                'token' => $token
-            ];
-            return response($response, 201);
-        }
+        $token = $user->createToken('userToken')->plainTextToken;
+        $response =[
+            'user' => $user,
+            'token' => $token
+        ];
+        return response($response, 201);
     }
     public function login(Request $request){
         $fields = $request->validate([
