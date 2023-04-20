@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Address;
+use App\Models\EmployeeRole;
 use App\Models\User;
+use App\Traits\ExceptionTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -12,6 +14,7 @@ use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
+    use ExceptionTrait;
 
     /** <div style="font-size: 3                                            0px; font-weight: 700; font-family: Josefin sans;"> Temporary </div>
      */
@@ -24,20 +27,18 @@ class AuthController extends Controller
         //check Email
         $user = User::where('email', $fields['email'])->first();
         if (!$user){
-            return response([
-                'message' => 'Email does not exist'
-            ]);
+            return $this->throwException('401', "Email does not exist");
         }
         //check password
         if(!Hash::check($fields['password'], $user->password)){
-            return response([
-                'message' => 'Wrong Password'
-            ]);
+            return $this->throwException('401', "Wrong Password");
         }
-
+        //$roles = EmployeeRole::find('')
+        $role = EmployeeRole::find($user->role_id);
         $token = $user->createToken('userToken')->plainTextToken;
         $response =[
             'user' => $user,
+            'role' => $role,
             'token' => $token
         ];
         return response($response, 201);
