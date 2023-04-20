@@ -12,4 +12,7 @@ class EmployeeRole extends Model
       'role',
       'slug',
     ];
+    public function users() {
+        return $this->hasMany(User::class);
+    }
 }
