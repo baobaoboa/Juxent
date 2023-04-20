@@ -25,16 +25,19 @@ class AuthController extends Controller
         //check Email
         $user = User::where('email', $fields['email'])->first();
         if (!$user){
-            return $this->throwException('401', "Email does not exist");
+            return  response(['error' => 'true', 'message' => 'Email does not exist'], 401);
+            //return $this->throwException('401', "Email does not exist");
         }
         //check password
         if(!Hash::check($fields['password'], $user->password)){
-            return $this->throwException('401', "Wrong Password");
+            return  response(['error' => 'true', 'message' => 'Wrong Password'], 401);
+           // return $this->throwException('401', "Wrong Password");
         }
         //$roles = EmployeeRole::find('')
         $role = EmployeeRole::find($user->role_id);
         $token = $user->createToken('userToken')->plainTextToken;
         $response =[
+            'return' => false,
             'user' => $user,
             'role' => $role,
             'token' => $token
