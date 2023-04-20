@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Address;
 use App\Models\EmployeeRole;
 use App\Models\User;
 use App\Traits\ExceptionTrait;

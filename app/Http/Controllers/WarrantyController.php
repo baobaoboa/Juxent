@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class IssueController extends Controller
+class WarrantyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class IssueController extends Controller
      */
     public function index()
     {
-        return "GG";
+        //
     }
 
     /**
