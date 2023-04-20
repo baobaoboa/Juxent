@@ -24,7 +24,6 @@ class User extends Authenticatable
         'last_name',
         'username',
         'email',
-        'password',
         'role_id',
         'birthday',
 
@@ -37,9 +36,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'remember_token',
-        'created_at',
-        'updated_at',
-        'role_id',
+        'password',
     ];
 
     /**
@@ -51,6 +48,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     public function role(){
-        return $this->belongsTo(Role::class, 'role_id');
+        return $this->belongsTo(EmployeeRole::class, 'role_id');
     }
 }
