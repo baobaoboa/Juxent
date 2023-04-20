@@ -37,7 +37,7 @@ class AuthController extends Controller
         $role = EmployeeRole::find($user->role_id);
         $token = $user->createToken('userToken')->plainTextToken;
         $response =[
-            'return' => false,
+            'error' => false,
             'user' => $user,
             'role' => $role,
             'token' => $token
