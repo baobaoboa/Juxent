@@ -6,8 +6,8 @@ use Illuminate\Validation\ValidationException;
 trait ExceptionTrait {
     private function throwException($errorCode,$message) {
         throw ValidationException::withMessages([
-            'code' => $errorCode,
-            'message' => $message
+            'message' => $message[0],
+            'code' => $errorCode[0]
         ]);
     }
 }
