@@ -16,9 +16,11 @@ return new class extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->uuid('id');
             $table->char('user_id');
-            $table->string('header');
-            $table->string('message');
+            //$table->string('header');
+            //$table->string('message');
             $table->boolean('is_read');
+            $table->string('title');
+            $table->text('content');
             $table->timestamps();
         });
     }

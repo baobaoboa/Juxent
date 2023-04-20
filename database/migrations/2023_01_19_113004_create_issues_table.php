@@ -14,19 +14,23 @@ return new class extends Migration
     public function up()
     {
         Schema::create('issues', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->id();
             $table->char('client_id');
             $table->char('sale_id');
             $table->char('support_id');
-            $table->date('date_accommodation');
             $table->string('reported_issue');
+            $table->string('priority');
+            $table->date('date_accommodation');
+            $table->string('findings');
             $table->string('status');
             $table->string('work_type');
-            $table->string('findings_service');
             $table->string('recommend_status');
             $table->double('fee');
             $table->double('charge');
+            $table->double('charge_fee');
             $table->string('time_allotted');
+            $table->string('client_signature');
+            $table->string('support_signature');
             $table->timestamps();
         });
     }
