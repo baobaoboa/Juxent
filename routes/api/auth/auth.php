@@ -6,7 +6,6 @@ use App\Http\Controllers\AuthController;
 
 //rate limit
 Route::group(['middleware' => ['throttle:verifyUser']], function(){
-    Route::post('/register', [AuthController::class,'register'])->name('auth.register');
     Route::post('/login', [AuthController::class,'login'])->name('auth.login');
 });
 
