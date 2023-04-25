@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\EmployeeRole;
 use App\Models\User;
 use App\Traits\ExceptionTrait;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -33,7 +34,7 @@ class AuthController extends Controller
         }
         //$roles = EmployeeRole::find('')
         $role = EmployeeRole::find($user->role_id);
-        $token = $user->createToken('userToken')->plainTextToken;
+        $token = $user->createToken('userToken', Carbon::now()->addDays(3))->plainTextToken;
         $response =[
             'user' => $user,
             'role' => $role,
