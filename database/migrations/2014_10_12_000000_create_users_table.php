@@ -20,10 +20,12 @@ return new class extends Migration
             $table->string('last_name');
             $table->bigInteger('role_id');
             $table->string('email')->unique();
-            $table->date('birthday')->nullable();
             $table->string('password');
+            $table->date('birthday')->nullable();
+            $table->string('profile_picture')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

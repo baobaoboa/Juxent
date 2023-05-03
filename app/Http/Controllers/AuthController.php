@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\EmployeeRole;
 use App\Models\User;
+use App\Services\Utils\FileServiceInterface;
 use App\Traits\ExceptionTrait;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -15,8 +16,14 @@ class AuthController extends Controller
 {
     use ExceptionTrait;
 
-    /** <div style="font-size: 3                                            0px; font-weight: 700; font-family: Josefin sans;"> Temporary </div>
-     */
+    private $fileService;
+    private $profilePictureFolderName;
+    public function __construct(FileServiceInterface $fileService)
+    {
+
+        $this->fileService = $fileService;
+        $this->profilePictureFolderName = config('storage.base_path') . 'profile_picture';
+    }
     public function login(Request $request){
         $fields = $request->validate([
             'email' => 'required|string',
@@ -49,7 +56,8 @@ class AuthController extends Controller
         ];
     }
     public function profile(Request $request){
-        auth()->user()->role;
-        return Auth::user();
+        $user = User::where('id', Auth::user()->id)->with('role')->first();
+        $user->profile_picture = $this->fileService->download($user->profile_picture, $user->id);
+        return $user;
     }
 }
