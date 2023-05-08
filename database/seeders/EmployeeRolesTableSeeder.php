@@ -15,7 +15,7 @@ class EmployeeRolesTableSeeder extends Seeder
      */
     public function run()
     {
-        $roles = ['Operations Manager', 'Secretary', 'Project Leader', 'Sales Consultant', 'Support'];
+        $roles = ['Operation Manager', 'Secretary', 'Project Leader', 'Sale Consultant', 'Support'];
         for ($i=0; $i<count($roles); $i++){
             DB::table('employee_roles')->insert([
                 ['role' => $roles[$i], 'slug' => str::slug($roles[$i])],

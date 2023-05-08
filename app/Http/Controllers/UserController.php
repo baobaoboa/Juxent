@@ -24,7 +24,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::whereNull('deleted_at')->with('role')->get();
+        $users = User::whereNull('deleted_at')->orderBy('role_id')->orderBy('last_name')->with('role')->get();
         foreach ($users as $user){
             if(isset($user->profile_picture)){
                 $user->profile_picture =$this->fileService->download($user->profile_picture, $user->id);
@@ -88,7 +88,18 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'first_name' => 'required|string',
+            'middle_name' => 'string',
+            'last_name' => 'required|string',
+            'role' => 'required|string',
+            'email' => 'required|string|unique:users,email',
+            'birthday' => 'string',
+            'password' => 'required|string|confirmed',
+        ]);
+        $user = User::find($id);
+        $user->update($request->all());
+        return $user;
     }
 
     /**
