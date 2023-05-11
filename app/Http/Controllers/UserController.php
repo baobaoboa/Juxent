@@ -44,7 +44,7 @@ class UserController extends Controller
     {
         $fields = $request->validate([
             'first_name' => 'required|string',
-            'middle_name' => 'string',
+            'middle_name' => '',
             'last_name' => 'required|string',
             'role' => 'required|string',
             'email' => 'required|string|unique:users,email',

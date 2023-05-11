@@ -6,16 +6,16 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ClientContact extends Model
+class Product extends Model
 {
     use HasFactory, HasUuids;
 
     protected $fillable = [
         'id',
-        'first_name',
-        'middle_name',
-        'last_name',
-        'email',
-        'contact_number',
+        'client_id',
+        'software_type_id',
+        'product_type',
+        'product_status',
+        'product_purchased',
     ];
 }

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('warranties', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->char('client_id');
             $table->date('date_of_purchase');
             $table->double('amount_paid');

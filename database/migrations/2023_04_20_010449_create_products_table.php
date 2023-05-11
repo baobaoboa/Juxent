@@ -19,7 +19,7 @@ return new class extends Migration
             $table->bigInteger('software_type_id');
             $table->string('product_type');
             $table->string('product_status');
-            $table->date('product_purchased');
+            $table->string('product_purchased');
             $table->timestamps();
         });
     }
