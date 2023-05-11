@@ -49,6 +49,7 @@ class UserController extends Controller
             'role' => 'required|string',
             'email' => 'required|string|unique:users,email',
             'birthday' => 'string',
+            'contact_number' => 'string|required',
             'password' => 'required|string|confirmed',
         ]);
 
@@ -68,6 +69,7 @@ class UserController extends Controller
             'password' => bcrypt($fields['password']),
             'profile_picture' => null,
             'created_by' => Auth::user()->id,
+            'contact_number' => $fields['contact_number'],
         ]);
         if(isset($request->profile_picture)){
             if(!in_array(explode(';',explode('/',explode(',', $request->profile_picture)[0])[1])[0], array('jpg','jpeg','png')) ) {
@@ -85,7 +87,10 @@ class UserController extends Controller
 
     public function show($id)
     {
-        //
+        return User::whereNull('deleted_at')
+            ->where('id', $id)
+            ->with('createdBy')
+            ->first();
     }
 
     public function update(Request $request, $id)

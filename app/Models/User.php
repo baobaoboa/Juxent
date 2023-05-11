@@ -28,6 +28,8 @@ class User extends Authenticatable
         'role_id',
         'birthday',
         'password',
+        'created_by',
+        'contact_number',
     ];
 
     /**
@@ -38,6 +40,7 @@ class User extends Authenticatable
     protected $hidden = [
         'remember_token',
         'password',
+
     ];
 
     /**
@@ -50,5 +53,8 @@ class User extends Authenticatable
     ];
     public function role(){
         return $this->belongsTo(EmployeeRole::class, 'role_id');
+    }
+    public function createdBy(){
+        return $this->belongsTo(User::class, 'created_by');
     }
 }

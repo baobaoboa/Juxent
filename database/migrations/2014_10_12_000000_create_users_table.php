@@ -22,6 +22,7 @@ return new class extends Migration
             $table->bigInteger('role_id');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('contact_number')->unique();
             $table->date('birthday')->nullable();
             $table->string('profile_picture')->nullable();
             $table->rememberToken();
