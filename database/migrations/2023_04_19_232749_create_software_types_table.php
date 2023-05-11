@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('software_types', function (Blueprint $table) {
             $table->id();
             $table->string('software_types');
-            $table->timestamps();
         });
     }
 

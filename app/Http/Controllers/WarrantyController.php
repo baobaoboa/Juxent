@@ -13,7 +13,7 @@ class WarrantyController extends Controller
      */
     public function index()
     {
-        //
+        return 1;
     }
 
     /**

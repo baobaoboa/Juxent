@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
+use App\Traits\ExceptionTrait;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    use ExceptionTrait;
+    public function index(Request $request)
     {
-        //
+
+        //select client->where yung latest warranty niya is equal sa request->date.
+        if(isset($request->date)){
+            $client = Client::where('created_at', $request->date)->join();
+        }
+        return Client::all();
     }
 
     /**
