@@ -8,6 +8,7 @@ use App\Services\Utils\FileServiceInterface;
 use App\Traits\ExceptionTrait;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -66,6 +67,7 @@ class UserController extends Controller
             'birthday' => $fields['birthday'],
             'password' => bcrypt($fields['password']),
             'profile_picture' => null,
+            'created_by' => Auth::user()->id,
         ]);
         if(isset($request->profile_picture)){
             if(!in_array(explode(';',explode('/',explode(',', $request->profile_picture)[0])[1])[0], array('jpg','jpeg','png')) ) {
