@@ -13,6 +13,8 @@ Route::prefix('operations-manager')->middleware(['role:operations-manager'])->gr
     Route::get('/user/{id}', [UserController::class, 'show'])->name('users.show');
     Route::get('/user', [UserController::class, 'index'])->name('users.index');
     Route::post('/record', [ClientController::class, 'store'])->name('record.store');
+    Route::post('/clients/', [ClientController::class, 'search-client'])->middleware(['throttle:searchUser'])->name('clients.search');
+    Route::get('/clients/{id}', [ClientController::class, 'show'])->name('clients.show');
 
 
 });
@@ -22,4 +24,11 @@ Route::prefix('secretary')->middleware(['role:secretary'])->group(function () {
     Route::get('/user/{id}', [UserController::class, 'show'])->name('users.show');
     Route::get('/user', [UserController::class, 'index'])->name('users.index');
     Route::post('/record', [ClientController::class, 'store'])->name('record.store');
+    Route::post('/clients/', [ClientController::class, 'search-client'])->middleware(['throttle:searchUser'])->name('clients.search');
+    Route::get('/clients/{id}', [ClientController::class, 'show'])->name('clients.show');
+});
+
+Route::prefix('sales-consultant')->middleware(['role:sales-consultant'])->group(function () {
+    Route::post('/clients/', [ClientController::class, 'search-client'])->middleware(['throttle:searchUser'])->name('clients.search');
+    Route::get('/clients/{id}', [ClientController::class, 'show'])->name('clients.show');
 });

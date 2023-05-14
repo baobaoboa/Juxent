@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('product_type');
             $table->string('product_status');
             $table->string('product_purchased');
+            $table->date('date_delivered');
             $table->timestamps();
         });
     }

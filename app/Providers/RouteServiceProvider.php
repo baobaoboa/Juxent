@@ -56,8 +56,11 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('verifyUser', function (Request $request) {
             return Limit::perMinute(80 )->by($request->user()?->id ?: $request->ip());
         });
+        RateLimiter::for('searchUser', function (Request $request) {
+        return Limit::perMinute(1000 )->by($request->user()?->id ?: $request->ip());
+        });
         RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
+            return Limit::perMinute(6000)->by($request->user()?->id ?: $request->ip());
         });
 
         //create function for every page want to rate limit

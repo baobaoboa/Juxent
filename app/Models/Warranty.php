@@ -13,12 +13,11 @@ class Warranty extends Model
     protected $fillable = [
         'id',
         'client_id',
-        'date_of_purchase',
         'amount_paid',
         'date_paid',
         'official_receipt',
         'acknowledgement_receipt',
-        'date_delivered',
         'record_status',
+        'starting_date_of_warranty_availed',
     ];
 }

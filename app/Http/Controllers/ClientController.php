@@ -25,12 +25,6 @@ class ClientController extends Controller
         return Client::all();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $fields = $request->validate([
@@ -41,16 +35,7 @@ class ClientController extends Controller
             'contact_number' => 'string|required',
             'client_name' => 'string|required',
             'company_address' => 'string|required',
-            'software_type_id' => 'string|required',
-            'product_type' => 'string|required',
-            'product_status' => 'string|required',
-            'product_purchased' => 'string|required',
-            'amount_paid' => 'integer|required',
-            'date_paid' => 'required|string',
-            'official_receipt' => 'required|string',
-            'acknowledgement_receipt' => 'required|string',
-            'date_delivered' => 'required|string',
-            'record_status' => 'required|string',
+
         ]);
 
         $clientContact = ClientContact::create([
@@ -67,58 +52,28 @@ class ClientController extends Controller
             'company_address' => $fields['company_address'],
             'contact_id' => $clientContact->id,
         ]);
-        $product = Product::create([
-            'client_id' => $client->id,
-            'software_type_id' => $fields['software_type_id'],
-            'product_type' => $fields['product_type'],
-            'product_status' => $fields['product_status'],
-            'product_purchased' => $fields['product_purchased'],
-        ]);
-        $warranty = Warranty::create([
-
-            'client_id' => $client->id,
-            'date_of_purchase' => Carbon::now(),
-            'amount_paid' => $fields['amount_paid'],
-            'date_paid' => date('Y-m-d', strtotime($fields['date_paid'])),
-            'official_receipt' => $fields['official_receipt'],
-            'acknowledgement_receipt' => $fields['acknowledgement_receipt'],
-            'date_delivered' => date('Y-m-d', strtotime($fields['date_delivered'])),
-            'record_status' => $fields['record_status'],
-        ]);
-        return response([ 'client' => $client,'client_contact' => $clientContact, 'product' => $product, 'warranty' => $warranty], 201);
+        return response([ 'client' => $client,'client_contact' => $clientContact], 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        return Client::where('id', $id)->with('contact')->first();
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
+    }
+    public function search(Request $request)
+    {
+        if(isset($request->client_name)){
+            $clients = Client::where('client_name', 'LIKE', '%'.$request->client_name.'%')->with('contact')->get();
+            return $clients;
+        }
+        return "";
     }
 }

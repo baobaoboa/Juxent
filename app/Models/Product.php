@@ -17,5 +17,6 @@ class Product extends Model
         'product_type',
         'product_status',
         'product_purchased',
+        'date_delivered',
     ];
 }
