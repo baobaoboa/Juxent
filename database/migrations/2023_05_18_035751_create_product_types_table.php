@@ -13,13 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('notifications', function (Blueprint $table) {
-            $table->uuid('id');
-            $table->char('user_id');
-            $table->string('title');
-            $table->text('content');
-            $table->boolean('is_read');
-            $table->timestamps();
+        Schema::create('product_types', function (Blueprint $table) {
+            $table->id();
+            $table->string('product_type');
         });
     }
 
@@ -30,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('notifications');
+        Schema::dropIfExists('product_types');
     }
 };

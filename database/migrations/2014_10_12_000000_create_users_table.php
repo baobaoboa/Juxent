@@ -15,16 +15,16 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->char('created_by')->nullable();
+            $table->bigInteger('role_id');
             $table->string('first_name');
             $table->string('middle_name')->nullable();
             $table->string('last_name');
-            $table->bigInteger('role_id');
             $table->string('email')->unique();
             $table->string('password');
             $table->string('contact_number')->unique();
             $table->date('birthday')->nullable();
             $table->string('profile_picture')->nullable();
+            $table->char('created_by')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

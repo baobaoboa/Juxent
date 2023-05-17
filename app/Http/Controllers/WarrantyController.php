@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Warranty;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WarrantyController extends Controller
 {
@@ -27,54 +28,42 @@ class WarrantyController extends Controller
     public function store(Request $request)
     {
         $fields = $request->validate([
+            'product_id' => 'string|required',
             'client_id' => 'string|required',
             'amount_paid' => 'integer|required',
             'date_paid' => 'required|string',
             'official_receipt' => 'required|string',
             'acknowledgement_receipt' => 'required|string',
             'record_status' => 'required|string',
+            'warranty' => 'required|string',
+            'starting_date_of_warranty_availed' => 'required|string',
         ]);
         $warranty = Warranty::create([
+            'product_id' => $fields['product_id'],
+            'created_by' => Auth::user()->id,
             'client_id' => $fields['client_id'],
             'amount_paid' => $fields['amount_paid'],
             'date_paid' => date('Y-m-d', strtotime($fields['date_paid'])),
             'official_receipt' => $fields['official_receipt'],
             'acknowledgement_receipt' => $fields['acknowledgement_receipt'],
             'record_status' => $fields['record_status'],
+            'warranty' => $fields['warranty'],
+            'starting_date_of_warranty_availed' => date('Y-m-d', strtotime($fields['starting_date_of_warranty_availed'])),
         ]);
 
         return response($warranty, 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

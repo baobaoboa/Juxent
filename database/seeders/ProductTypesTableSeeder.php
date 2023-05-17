@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class SoftwareTypesTableSeeder extends Seeder
+class ProductTypesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,10 +15,10 @@ class SoftwareTypesTableSeeder extends Seeder
      */
     public function run()
     {
-        $types = ['Software','Hardware','Miscellaneous','Others'];
+        $types = ['Retail','Fast Food Restaurant','Fine Dining','Supermarket','Pharmacy'];
         for($i=0; $i<count($types); $i++){
-            DB::table('product_types')->insert([
-                'product_type' => $types[$i]
+            DB::table('software_types')->insert([
+                'software_type' => $types[$i]
             ]);
         }
     }

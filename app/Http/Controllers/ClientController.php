@@ -71,8 +71,7 @@ class ClientController extends Controller
     public function search(Request $request)
     {
         if(isset($request->client_name)){
-            $clients = Client::where('client_name', 'LIKE', '%'.$request->client_name.'%')->with('contact')->get();
-            return $clients;
+            return Client::where('client_name', 'LIKE', '%'.$request->client_name.'%')->with('contact')->get();
         }
         return "";
     }

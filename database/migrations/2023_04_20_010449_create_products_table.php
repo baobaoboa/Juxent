@@ -17,8 +17,8 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->char('client_id');
             $table->bigInteger('software_type_id');
-            $table->string('product_type');
-            $table->string('product_status');
+            $table->bigInteger('product_type_id');
+            //$table->string('product_status');
             $table->string('product_purchased');
             $table->date('date_delivered');
             $table->timestamps();

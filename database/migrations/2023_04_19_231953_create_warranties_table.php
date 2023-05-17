@@ -15,11 +15,14 @@ return new class extends Migration
     {
         Schema::create('warranties', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->char('client_id');
+            $table->char('created_by');
+            $table->char('product_id');
             $table->double('amount_paid');
+            $table->date('date_paid');
             $table->string('official_receipt');
+            $table->string('warranty');
             $table->string('acknowledgement_receipt');
-            $table->string('record_status');
+            //$table->string('record_status');
             $table->date('starting_date_of_warranty_availed');
             $table->timestamps();
         });
