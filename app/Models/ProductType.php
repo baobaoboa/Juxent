@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class ProductType extends Model
 {
     use HasFactory;
+
+
+    public function role(){
+        return $this->belongsTo(EmployeeRole::class, 'role_id');
+    }
 }

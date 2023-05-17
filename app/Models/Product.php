@@ -19,4 +19,11 @@ class Product extends Model
         'product_purchased',
         'date_delivered',
     ];
+    public function warranties() {
+        return $this->hasMany(Warranty::class)->orderBy('created_at', 'desc');
+    }
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 }

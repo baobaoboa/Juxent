@@ -20,4 +20,7 @@ class Warranty extends Model
         'record_status',
         'starting_date_of_warranty_availed',
     ];
+    public function product() {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
 }

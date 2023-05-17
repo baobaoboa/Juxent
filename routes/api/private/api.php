@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WarrantyController;
 use Illuminate\Support\Facades\Route;
@@ -31,4 +32,5 @@ Route::prefix('sales-consultant')->middleware(['role:sales-consultant'])->group(
     Route::post('/clients', [ClientController::class, 'store'])->name('client.store');
     Route::post('/products', [ProductController::class, 'store'])->name('product.store');
     Route::post('/warranties', [WarrantyController::class, 'store'])->name('product.store');
+    Route::get('/records', [ResourceController::class, 'getRecords'])->name('all.records');
 });

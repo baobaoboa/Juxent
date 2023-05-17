@@ -18,11 +18,6 @@ class ClientController extends Controller
     public function index(Request $request)
     {
 
-        //select client->where yung latest warranty niya is equal sa request->date.
-        if(isset($request->date)){
-            $client = Client::where('created_at', $request->date)->join();
-        }
-        return Client::all();
     }
 
     public function store(Request $request)
