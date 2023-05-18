@@ -15,3 +15,5 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::post('/logout', [AuthController::class,'logout'])->name('auth.logout');
 });
 
+
+Route::get('/test', [\App\Http\Controllers\ResourceController::class,'getRecords'])->name('auth.logout');

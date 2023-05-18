@@ -9,6 +9,6 @@ use Illuminate\Http\Request;
 class ResourceController extends Controller
 {
     public function getRecords() {
-        return Client::with('products')->paginate(25);
+        return Client::with('contact')->with('products')->paginate(25);
     }
 }

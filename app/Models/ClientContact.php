@@ -18,4 +18,8 @@ class ClientContact extends Model
         'email',
         'contact_number',
     ];
+
+    public function client() {
+        return $this->hasMany(Client::class);
+    }
 }
