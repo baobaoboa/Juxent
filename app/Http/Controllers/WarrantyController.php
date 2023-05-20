@@ -41,7 +41,6 @@ class WarrantyController extends Controller
         $warranty = Warranty::create([
             'product_id' => $fields['product_id'],
             'created_by' => Auth::user()->id,
-            'client_id' => $fields['client_id'],
             'amount_paid' => $fields['amount_paid'],
             'date_paid' => date('Y-m-d', strtotime($fields['date_paid'])),
             'official_receipt' => $fields['official_receipt'],

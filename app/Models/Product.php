@@ -14,9 +14,9 @@ class Product extends Model
         'id',
         'client_id',
         'software_type_id',
-        'product_type',
+        'product_type_id',
         'product_status',
-        'product_purchased',
+        'product_purchase',
         'date_delivered',
         'date_of_purchased'
     ];

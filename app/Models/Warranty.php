@@ -12,7 +12,7 @@ class Warranty extends Model
 
     protected $fillable = [
         'id',
-        'client_id',
+        'product_id',
         'amount_paid',
         'date_paid',
         'official_receipt',
