@@ -16,9 +16,9 @@ class Product extends Model
         'software_type_id',
         'product_type_id',
         'product_status',
-        'product_purchase',
+        'product_purchased',
         'date_delivered',
-        'date_of_purchased'
+        'date_of_purchase'
     ];
     public function warranties() {
         return $this->hasMany(Warranty::class)->orderBy('created_at', 'desc');
