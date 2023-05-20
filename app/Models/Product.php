@@ -18,7 +18,8 @@ class Product extends Model
         'product_status',
         'product_purchased',
         'date_delivered',
-        'date_of_purchase'
+        'date_of_purchase',
+        'record_status'
     ];
     public function warranties() {
         return $this->hasMany(Warranty::class)->orderBy('created_at', 'desc');

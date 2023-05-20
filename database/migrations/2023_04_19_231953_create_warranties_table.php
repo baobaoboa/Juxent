@@ -21,6 +21,7 @@ return new class extends Migration
             $table->date('date_paid');
             $table->string('official_receipt');
             $table->string('warranty');
+            $table->string('record_status');
             $table->string('acknowledgement_receipt');
             //$table->string('record_status');
             $table->date('starting_date_of_warranty_availed');
