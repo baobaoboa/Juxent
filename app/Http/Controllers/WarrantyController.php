@@ -62,8 +62,8 @@ class WarrantyController extends Controller
             'date_paid' => date('Y-m-d', strtotime($fields['date_paid'])),
             'record_status' => $fields['record_status'],
             'warranty' => $fields['warranty'],
-            'official_receipt' =>$this->fileService->upload($this->officialReceiptFolderName, $filename, $request->official_receipt, $product->id),
-            'acknowledgement_receipt' =>$this->fileService->upload($this->acknowledgementReceiptFolderName, $filename, $request->acknowledgement_receipt, $product->id),
+            'official_receipt' =>$this->fileService->upload($this->officialReceiptFolderName, $filename, $request->official_receipt, $fields['product_id']),
+            'acknowledgement_receipt' =>$this->fileService->upload($this->acknowledgementReceiptFolderName, $filename, $request->acknowledgement_receipt, $fields['product_id']),
             'starting_date_of_warranty_availed' => date('Y-m-d', strtotime($fields['starting_date_of_warranty_availed'])),
         ]);
 
