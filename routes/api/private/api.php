@@ -16,6 +16,15 @@ Route::prefix('operations-manager')->middleware(['role:operations-manager'])->gr
     Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::get('/clients/{id}', [ClientController::class, 'show'])->name('clients.show');
+    Route::delete('/clients/{id}', [ClientController::class, 'destroy'])->name('clients.destroy');
+    Route::put('/clients/{id}', [ClientController::class, 'update'])->name('clients.update');
+    Route::put('/warranties/{id}', [WarrantyController::class, 'update'])->name('warranty.update');
+    Route::delete('/warranties/{id}', [WarrantyController::class, 'destroy'])->name('warranty.destroy');
+    Route::put('/products/{id}', [WarrantyController::class, 'update'])->name('product.update');
+    Route::delete('/products/{id}', [WarrantyController::class, 'destroy'])->name('product.destroy');
+
+
+
 });
 
 Route::prefix('secretary')->middleware(['role:secretary'])->group(function () {
@@ -23,14 +32,28 @@ Route::prefix('secretary')->middleware(['role:secretary'])->group(function () {
     Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::get('/clients/{id}', [ClientController::class, 'show'])->name('clients.show');
+    Route::delete('/clients/{id}', [ClientController::class, 'destroy'])->name('clients.destroy');
+    Route::put('/clients/{id}', [ClientController::class, 'update'])->name('clients.update');
+    Route::put('/warranties/{id}', [WarrantyController::class, 'update'])->name('warranty.update');
+    Route::delete('/warranties/{id}', [WarrantyController::class, 'destroy'])->name('warranty.destroy');
+    Route::put('/products/{id}', [WarrantyController::class, 'update'])->name('product.update');
+    Route::delete('/products/{id}', [WarrantyController::class, 'destroy'])->name('product.destroy');
 });
 
 Route::prefix('sales-consultant')->middleware(['role:sales-consultant'])->group(function () {
     Route::post('/clients/search/', [ClientController::class, 'search'])->middleware(['throttle:searchUser'])->name('clients.search');
     Route::post('/products/search/', [ProductController::class, 'search'])->middleware(['throttle:searchUser'])->name('products.search');
     Route::get('/clients/{id}', [ClientController::class, 'show'])->name('clients.show');
+    Route::delete('/clients/{id}', [ClientController::class, 'destroy'])->name('clients.destroy');
     Route::post('/clients', [ClientController::class, 'store'])->name('client.store');
     Route::post('/products', [ProductController::class, 'store'])->name('product.store');
     Route::post('/warranties', [WarrantyController::class, 'store'])->name('product.store');
     Route::get('/records', [ResourceController::class, 'getRecords'])->name('all.records');
+    Route::get('/records/{date}', [ResourceController::class, 'showRecords'])->name('show.records');
+    Route::delete('/clients/{id}', [ClientController::class, 'destroy'])->name('clients.destroy');
+    Route::put('/clients/{id}', [ClientController::class, 'update'])->name('clients.update');
+    Route::put('/warranties/{id}', [WarrantyController::class, 'update'])->name('warranty.update');
+    Route::delete('/warranties/{id}', [WarrantyController::class, 'destroy'])->name('warranty.destroy');
+    Route::put('/products/{id}', [WarrantyController::class, 'update'])->name('product.update');
+    Route::delete('/products/{id}', [WarrantyController::class, 'destroy'])->name('product.destroy');
 });

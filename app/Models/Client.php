@@ -24,7 +24,7 @@ class Client extends Model
         return $this->belongsTo(ClientContact::class, 'contact_id');
     }
     public function products(){
-        return $this->hasMany( Product::class)->orderBy('created_at', 'desc')->with('warranties');
+        return $this->hasMany( Product::class)->orderBy('created_at', 'desc')->with('warranties')->with('softwareType')->with('productType');
     }
 
 }

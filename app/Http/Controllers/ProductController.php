@@ -78,4 +78,16 @@ class ProductController extends Controller
         }
         return "";
     }
+    public function update(Request $request, $id)
+    {
+        $product = product::find($id);
+        $product->update($request->all());
+        return $product;
+    }
+    public function destroy($id)
+    {
+        $product = Product::where('id', $id)->first();
+        $product->deleted_at = date('Y-m-d h:m:s', Carbon::now());
+        return $product;
+    }
 }

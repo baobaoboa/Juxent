@@ -17,7 +17,7 @@ class ClientController extends Controller
     use ExceptionTrait;
     public function index(Request $request)
     {
-
+        return Client::whereNull('deleted_at')->paginate(25);
     }
 
     public function store(Request $request)
@@ -57,11 +57,15 @@ class ClientController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $client = Client::find($id);
+        $client->update($request->all());
+        return $client;
     }
     public function destroy($id)
     {
-        //
+        $client = Client::where('id', $id)->first();
+        $client->deleted_at = date('Y-m-d h:m:s', Carbon::now());
+        return $client;
     }
     public function search(Request $request)
     {

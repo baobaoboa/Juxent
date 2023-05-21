@@ -23,7 +23,7 @@ class WarrantyController extends Controller
     }
     public function index()
     {
-        return 1;
+        return Warranty::paginate(25);
     }
 
     /**
@@ -70,18 +70,21 @@ class WarrantyController extends Controller
         return response($warranty, 201);
     }
 
-    public function show($id)
+    public function show($date)
     {
-        //
+
     }
 
     public function update(Request $request, $id)
     {
-        //
+        $warranty = Warranty::find($id);
+        $warranty->update($request->all());
+        return $warranty;
     }
-
     public function destroy($id)
     {
-        //
+        $warranty = warranty::where('id', $id)->first();
+        $warranty->deleted_at = date('Y-m-d h:m:s', Carbon::now());
+        return $warranty;
     }
 }

@@ -27,5 +27,15 @@ class Product extends Model
     public function user(){
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function client() {
+        return $this->belongsTo(Client::class, 'client_id');
+    }
+    public function softwareType() {
+        return $this->belongsTo(SoftwareType::class, 'software_type_id');
+    }
+    public function productType() {
+        return $this->belongsTo(ProductType::class, 'product_type_id');
+    }
+
 
 }

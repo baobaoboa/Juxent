@@ -23,6 +23,6 @@ class Warranty extends Model
         'starting_date_of_warranty_availed',
     ];
     public function product() {
-        return $this->belongsTo(Product::class, 'product_id');
+        return $this->belongsTo(Product::class, 'product_id')->with('client')->with('softwareType')->with('productType');
     }
 }
