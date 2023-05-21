@@ -16,6 +16,7 @@ class Warranty extends Model
         'amount_paid',
         'date_paid',
         'created_by',
+        'warranty',
         'official_receipt',
         'acknowledgement_receipt',
         'record_status',
