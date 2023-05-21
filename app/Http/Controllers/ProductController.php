@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Auth;
 class ProductController extends Controller
 {
     private $fileService;
-    private $profilePictureFolderName;
+    private $officialReceiptFolderName;
+    private $acknowledgementReceiptFolderName;
 
     public function __construct(FileServiceInterface $fileService)
     {
