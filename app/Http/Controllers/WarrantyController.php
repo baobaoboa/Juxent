@@ -23,15 +23,10 @@ class WarrantyController extends Controller
     }
     public function index()
     {
-        return Warranty::paginate(25);
+        return Warranty::orderBy('created_at', 'desc')->paginate(25);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $fields = $request->validate([
@@ -87,4 +82,15 @@ class WarrantyController extends Controller
         $warranty->deleted_at = date('Y-m-d h:m:s', Carbon::now());
         return $warranty;
     }
+    public function showRange(Request $request)
+    {
+        $fields = $request->validate([
+            'from' => 'required|string',
+            'to' => 'required|string',
+        ]);
+        $from = date('Y-m-d 00:00:00', strtotime($fields['from']));
+        $to = date('Y-m-d 23:59:59', strtotime($fields['to']));
+        return Warranty::whereBetween('created_at', [$from, $to])->orWhereBetween('created_at', [$from, $to])->with('product')->paginate(25);
+    }
+
 }

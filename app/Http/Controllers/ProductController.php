@@ -23,7 +23,7 @@ class ProductController extends Controller
         $this->officialReceiptFolderName = config('storage.base_path') . 'official_receipt';
         $this->acknowledgementReceiptFolderName = config('storage.base_path') . 'acknowledgement_receipt';
     }
-    public function  store(Request $request) {
+    public function store(Request $request) {
         $fields = $request->validate([
             'client_id' => 'string|required',
             'software_type_id' => 'string|required',
@@ -70,11 +70,11 @@ class ProductController extends Controller
 
         return response(['product' => $product, 'warranty' => $warranty], 201);
     }
-
     public function search(Request $request)
     {
+        $fields = $request->validate(['client_id', 'required|string']);
         if(isset($request->product_purchased)){
-            return Product::where('client_name', 'LIKE', '%'.$request->product_purchased.'%')->get();
+            return Product::where('client_id', $fields['client_id'])->where('product_purchase', 'LIKE', '%'.$request->product_purchased.'%')->get();
         }
         return "";
     }
@@ -89,5 +89,18 @@ class ProductController extends Controller
         $product = Product::where('id', $id)->first();
         $product->deleted_at = date('Y-m-d h:m:s', Carbon::now());
         return $product;
+    }
+    public function showRange(Request $request)
+    {
+        $fields = $request->validate([
+            'from' => 'required|string',
+            'to' => 'required|string',
+        ]);
+        $from = date('Y-m-d 00:00:00', strtotime($fields['from']));
+        $to = date('Y-m-d 23:59:59', strtotime($fields['to']));
+        return Product::whereBetween('created_at', [$from, $to])->orWhereBetween('created_at', [$from, $to])->with('product')->paginate(25);
+    }
+    public function show($id){
+        return Product::where('id', $id)->with('warranties')->with('user')->with('client')->with('softwareType')->with('productType')->first();
     }
 }
