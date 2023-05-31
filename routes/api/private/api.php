@@ -25,6 +25,7 @@ Route::prefix('operations-manager')->middleware(['role:operations-manager'])->gr
     Route::put('/clients/{id}', [ClientController::class, 'update'])->name('clients.update');
 
     //warranties
+    Route::get('/warranties', [WarrantyController::class, 'index'])->name('all.warranties');
     Route::put('/warranties/{id}', [WarrantyController::class, 'update'])->name('warranty.update');
     Route::delete('/warranties/{id}', [WarrantyController::class, 'destroy'])->name('warranty.destroy');
     Route::get('/warranties', [WarrantyController::class, 'showRange'])->name('warranty.showRange');
