@@ -21,9 +21,23 @@ class WarrantyController extends Controller
         $this->officialReceiptFolderName = config('storage.base_path') . 'official_receipt';
         $this->acknowledgementReceiptFolderName = config('storage.base_path') . 'acknowledgement_receipt';
     }
-    public function index()
+    public function index(Request $request)
     {
-        return Warranty::orderBy('created_at', 'desc')->paginate(25);
+        $query = Warranty::with('product');
+
+        //date
+        if($request->date === 'asc') {
+            $query = $query->orderBy('created_at', 'asc');
+        }
+        if($request->date === 'desc') {
+            $query = $query->orderBy('created_at', 'desc');
+        }
+
+        //record_status
+        if($request->record_status){
+            $query = $query->where('record_status', $request->record_status);
+        }
+        return response($query->get(), 200);
     }
 
 

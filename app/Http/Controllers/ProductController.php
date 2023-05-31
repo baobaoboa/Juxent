@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Product;
+use App\Models\ProductType;
 use App\Models\Warranty;
 use App\Services\Utils\FileServiceInterface;
 use Carbon\Carbon;
@@ -22,6 +23,31 @@ class ProductController extends Controller
         $this->fileService = $fileService;
         $this->officialReceiptFolderName = config('storage.base_path') . 'official_receipt';
         $this->acknowledgementReceiptFolderName = config('storage.base_path') . 'acknowledgement_receipt';
+    }
+    public function index(Request $request){
+        $query = Product::with('warranties')->with('client')->with('software_type')->with('product_type');
+
+        //date
+        if($request->date === 'asc') {
+            $query = $query->orderBy('created_at', 'asc');
+        }
+        if($request->date === 'desc') {
+            $query = $query->orderBy('created_at', 'desc');
+        }
+
+        //product_type
+        if($request->product_type){
+            $product_type_id = ProductType::where('product_type', 'like', '%' .$request->product_type. '%')->first()->id;
+            $query = $query->where('product_type_id', $product_type_id);
+        }
+
+        //software_type
+        if($request->software_type){
+            $software_type_id = ProductType::where('software_type', 'like', '%' .$request->software_type. '%')->first()->id;
+            $query = $query->where('software_type_id', $software_type_id);
+        }
+        return response($query->get(), 200);
+
     }
     public function store(Request $request) {
         $fields = $request->validate([

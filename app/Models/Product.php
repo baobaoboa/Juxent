@@ -24,9 +24,6 @@ class Product extends Model
     public function warranties() {
         return $this->hasMany(Warranty::class)->orderBy('created_at', 'desc');
     }
-    public function user(){
-        return $this->belongsTo(User::class, 'user_id');
-    }
     public function client() {
         return $this->belongsTo(Client::class, 'client_id');
     }
