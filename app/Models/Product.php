@@ -25,7 +25,7 @@ class Product extends Model
         return $this->hasMany(Warranty::class)->orderBy('created_at', 'desc');
     }
     public function client() {
-        return $this->belongsTo(Client::class, 'client_id');
+        return $this->belongsTo(Client::class, 'client_id')->with('contact');
     }
     public function softwareType() {
         return $this->belongsTo(SoftwareType::class, 'software_type_id');
