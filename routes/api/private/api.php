@@ -28,7 +28,7 @@ Route::prefix('operations-manager')->middleware(['role:operations-manager'])->gr
     Route::get('/warranties', [WarrantyController::class, 'index'])->name('all.warranties');
     Route::put('/warranties/{id}', [WarrantyController::class, 'update'])->name('warranty.update');
     Route::delete('/warranties/{id}', [WarrantyController::class, 'destroy'])->name('warranty.destroy');
-    Route::get('/warranties', [WarrantyController::class, 'showRange'])->name('warranty.showRange');
+    Route::get('/warranties', [WarrantyController::class, 'index'])->name('warranty.index');
 
     //products
     Route::get('/products', [ProductController::class, 'index'])->name('all.product');
@@ -58,6 +58,13 @@ Route::prefix('secretary')->middleware(['role:secretary'])->group(function () {
     Route::put('/products/{id}', [WarrantyController::class, 'update'])->name('product.update');
     Route::delete('/products/{id}', [WarrantyController::class, 'destroy'])->name('product.destroy');
     Route::get('/products/{id}', [ProductController::class, 'show'])->name('show.product');
+
+
+    //warranties
+    Route::get('/warranties', [WarrantyController::class, 'index'])->name('warranty.index');
+    Route::put('/warranties/{id}', [WarrantyController::class, 'update'])->name('warranty.update');
+    Route::delete('/warranties/{id}', [WarrantyController::class, 'destroy'])->name('warranty.destroy');
+    Route::post('/warranties', [WarrantyController::class, 'store'])->name('warranty.store');
 });
 
 Route::prefix('sales-consultant')->middleware(['role:sales-consultant'])->group(function () {
@@ -73,9 +80,9 @@ Route::prefix('sales-consultant')->middleware(['role:sales-consultant'])->group(
     Route::get('/records/{date}', [ResourceController::class, 'showRecords'])->name('show.records');
 
     //warranties
+    Route::get('/warranties', [WarrantyController::class, 'index'])->name('warranty.index');
     Route::put('/warranties/{id}', [WarrantyController::class, 'update'])->name('warranty.update');
     Route::delete('/warranties/{id}', [WarrantyController::class, 'destroy'])->name('warranty.destroy');
-    Route::get('/warranties', [WarrantyController::class, 'showRange'])->name('warranty.showRange');
     Route::post('/warranties', [WarrantyController::class, 'store'])->name('warranty.store');
 
     //products

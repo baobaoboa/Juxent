@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Warranty;
 use App\Services\Utils\FileServiceInterface;
+use App\Traits\ExceptionTrait;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class WarrantyController extends Controller
 {
+
+    use ExceptionTrait;
     private $fileService;
     private $officialReceiptFolderName;
     private $acknowledgementReceiptFolderName;
@@ -31,6 +34,18 @@ class WarrantyController extends Controller
         }
         if($request->date === 'desc') {
             $query = $query->orderBy('created_at', 'desc');
+        }
+
+        if(isset($request->from)){
+            if(isset($request->to)){
+                $from = date('Y-m-d 00:00:00', strtotime($request->from));
+                $to = date('Y-m-d 23:59:59', strtotime($request->to));
+                return Warranty::whereBetween('created_at', [$from, $to])->orWhereBetween('created_at', [$from, $to])->with('product')->paginate(25);
+
+            }
+            else {
+                $this->throwException('Date To is required', 400);
+            }
         }
 
         //record_status
