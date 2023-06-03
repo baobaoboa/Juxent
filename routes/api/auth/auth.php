@@ -16,4 +16,36 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
 });
 
 
-Route::get('/test', [\App\Http\Controllers\ResourceController::class,'getRecords'])->name('auth.logout');
+Route::prefix('operations-manager')->middleware(['role:operations-manager'])->group(function () {
+    //issue
+    Route::post('/issue', [IssueController::class, 'store'])->name('issue.store');
+    Route::get('/issue', [IssueController::class, 'index'])->name('issue.index');
+
+    //users
+    Route::post('/users', [UserController::class, 'store'])->name('users.store');
+    Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+
+    //clients
+    Route::post('/clients/search/', [ClientController::class, 'search'])->middleware(['throttle:searchUser'])->name('clients.search');
+    Route::get('/clients/{id}', [ClientController::class, 'show'])->name('clients.show');
+    Route::delete('/clients/{id}', [ClientController::class, 'destroy'])->name('clients.destroy');
+    Route::put('/clients/{id}', [ClientController::class, 'update'])->name('clients.update');
+
+    //warranties
+    Route::get('/warranties', [WarrantyController::class, 'index'])->name('all.warranties');
+    Route::put('/warranties/{id}', [WarrantyController::class, 'update'])->name('warranty.update');
+    Route::delete('/warranties/{id}', [WarrantyController::class, 'destroy'])->name('warranty.destroy');
+    Route::get('/warranties', [WarrantyController::class, 'index'])->name('warranty.index');
+
+    //products
+    Route::get('/products', [ProductController::class, 'index'])->name('all.product');
+    Route::put('/products/{id}', [WarrantyController::class, 'update'])->name('product.update');
+    Route::delete('/products/{id}', [WarrantyController::class, 'destroy'])->name('product.destroy');
+    Route::get('/products/{id}', [ProductController::class, 'show'])->name('show.product');
+
+
+    //records
+    Route::get('/records', [ResourceController::class, 'getRecords'])->name('all.records');
+    Route::get('/records/{date}', [ResourceController::class, 'showRecords'])->name('show.records');
+});
