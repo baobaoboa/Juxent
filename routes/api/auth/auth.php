@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\IssueController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ResourceController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\WarrantyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
