@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Models\Product;
 use App\Models\ProductType;
+use App\Models\SoftwareType;
 use App\Models\Warranty;
 use App\Services\Utils\FileServiceInterface;
 use Carbon\Carbon;
@@ -43,7 +44,7 @@ class ProductController extends Controller
 
         //software_type
         if($request->software_type){
-            $software_type_id = ProductType::where('software_type', 'like', '%' .$request->software_type. '%')->first()->id;
+            $software_type_id = SoftwareType::where('software_type', 'like', '%' .$request->software_type. '%')->first()->id;
             $query = $query->where('software_type_id', $software_type_id);
         }
         return response($query->get(), 200);
