@@ -22,7 +22,7 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
 });
 
 
-Route::prefix('operations-manager')->middleware(['role:operations-manager'])->group(function () {
+Route::prefix('operations-manager')->group(function () {
     //issue
     Route::post('/issue', [IssueController::class, 'store'])->name('issue.store');
     Route::get('/issue', [IssueController::class, 'index'])->name('issue.index');
