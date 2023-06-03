@@ -16,7 +16,6 @@ class ResourceController extends Controller
         $date = date('Y-m-d', strtotime($date));
         if($request->input('status') == 'active'){
             return Warranty::where('record_status', 'active')->orderBy('created_at', 'desc')->where('updated_at', 'LIKE', '%'.$date.'%')->with('product')->paginate(25);
-
         }
         return Warranty::where('updated_at', 'LIKE', '%'.$date.'%')->orderBy('created_by', 'desc')->with('product')->paginate(25);
     }

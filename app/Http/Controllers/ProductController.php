@@ -25,7 +25,7 @@ class ProductController extends Controller
         $this->acknowledgementReceiptFolderName = config('storage.base_path') . 'acknowledgement_receipt';
     }
     public function index(Request $request){
-        $query = Product::with('warranties')->with('client')->with('software_type')->with('product_type');
+        $query = Product::with('warranties')->with('client')->with('softwareType')->with('productType');
 
         //date
         if($request->date === 'asc') {

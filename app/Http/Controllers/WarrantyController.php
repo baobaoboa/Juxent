@@ -106,5 +106,4 @@ class WarrantyController extends Controller
         $to = date('Y-m-d 23:59:59', strtotime($fields['to']));
         return Warranty::whereBetween('created_at', [$from, $to])->orWhereBetween('created_at', [$from, $to])->with('product')->paginate(25);
     }
-
 }
