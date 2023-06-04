@@ -46,12 +46,14 @@ Route::prefix('operations-manager')->group(function () {
 
     //products
     Route::get('/products', [ProductController::class, 'index'])->name('all.product');
-    Route::put('/products/{id}', [WarrantyController::class, 'update'])->name('product.update');
+    Route::post('/products', [ProductController::class, 'store'])->name('product.store');
     Route::delete('/products/{id}', [WarrantyController::class, 'destroy'])->name('product.destroy');
+    Route::put('/products/{id}', [WarrantyController::class, 'update'])->name('product.update');
+    Route::post('/products/search/', [ProductController::class, 'search'])->middleware(['throttle:searchUser'])->name('products.search');
     Route::get('/products/{id}', [ProductController::class, 'show'])->name('show.product');
-
 
     //records
     Route::get('/records', [ResourceController::class, 'getRecords'])->name('all.records');
     Route::get('/records/{date}', [ResourceController::class, 'showRecords'])->name('show.records');
+    Route::get('/records/show/{id}', [ResourceController::class, 'show'])->name('record.show');
 });

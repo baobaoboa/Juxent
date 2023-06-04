@@ -19,4 +19,8 @@ class ResourceController extends Controller
         }
         return Warranty::where('updated_at', 'LIKE', '%'.$date.'%')->orderBy('created_by', 'desc')->with('product')->paginate(25);
     }
+
+    public function show($id){
+        return Client::where('id', $id)->with('contact')->with('products')->first();
+    }
 }
