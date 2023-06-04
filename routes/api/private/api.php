@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IssueController;
 
 
-/*Route::prefix('operations-manager')->middleware(['role:operations-manager'])->group(function () {
+Route::prefix('operations-manager')->middleware(['role:operations-manager'])->group(function () {
     //issue
     Route::post('/issue', [IssueController::class, 'store'])->name('issue.store');
     Route::get('/issue', [IssueController::class, 'index'])->name('issue.index');
@@ -42,7 +42,7 @@ use App\Http\Controllers\IssueController;
     //records
     Route::get('/records', [ResourceController::class, 'getRecords'])->name('all.records');
     Route::get('/records/{date}', [ResourceController::class, 'showRecords'])->name('show.records');
-});*/
+});
 
 Route::prefix('secretary')->middleware(['role:secretary'])->group(function () {
     //users
