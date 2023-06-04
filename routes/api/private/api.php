@@ -75,6 +75,7 @@ Route::prefix('secretary')->middleware(['role:secretary'])->group(function () {
 
     //dashboard
     Route::get('/dashboard/clients/{year}', [DashboardController::class, 'totalClientRecords'])->name('all.clients');
+    Route::get('/dashboard/clients/month/{year}', [DashboardController::class, 'totalClientRecordsByMonth'])->name('all.clients');
     Route::get('/dashboard/warranty/{year}', [DashboardController::class, 'totalWarrantyRecords'])->name('all.clients');
     Route::get('/dashboard/clients', [DashboardController::class, 'purchasedByClient'])->name('totalPurchasedClients');
 

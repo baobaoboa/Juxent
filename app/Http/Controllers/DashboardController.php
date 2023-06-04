@@ -50,4 +50,25 @@ class DashboardController extends Controller
         $result['Lowest'] = $product->min();
         return response( $result, 200);
     }
+
+    public function totalClientRecordsByMonth($year) {
+        $months = [
+            'January', 'February', 'March', 'April', 'May', 'June', 'July',
+            'August', 'September', 'October', 'November', 'December'
+        ];
+
+        $data = Product::selectRaw('MONTH(date_of_purchase) as month, COUNT(*) as count')
+            ->whereYear('date_of_purchase', $year)
+            ->groupBy('month')
+            ->get();
+
+        $result = array_fill_keys($months, 0);
+
+        foreach ($data as $row) {
+            $monthName = date('F', mktime(0, 0, 0, $row->month, 1));
+            $result[$monthName] = $row->count;
+        }
+
+        return response()->json($result);
+    }
 }
