@@ -40,6 +40,14 @@ class DashboardController extends Controller
         return response($result, 200);
     }
     public function purchasedByClient() {
-
+        $result = [];
+        $product = Product::all()
+            ->groupBy('client_id')
+            ->map(function ($product) {
+                return $product->count();
+            });
+        $result['Highest'] = $product->max();
+        $result['Lowest'] = $product->min();
+        return response( $result, 200);
     }
 }
