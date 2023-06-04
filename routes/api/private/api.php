@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\UserController;
@@ -63,14 +64,20 @@ Route::prefix('secretary')->middleware(['role:secretary'])->group(function () {
 
     //products
     Route::get('/products', [ProductController::class, 'index'])->name('all.product');
-    Route::put('/products/{id}', [WarrantyController::class, 'update'])->name('product.update');
-    Route::delete('/products/{id}', [WarrantyController::class, 'destroy'])->name('product.destroy');
+    Route::put('/products/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
     Route::get('/products/{id}', [ProductController::class, 'show'])->name('show.product');
 
     //records
     Route::get('/records', [ResourceController::class, 'getRecords'])->name('all.records');
     Route::get('/records/{date}', [ResourceController::class, 'showRecords'])->name('show.records');
     Route::get('/records/show/{id}', [ResourceController::class, 'show'])->name('show.record');
+
+    //dashboard
+    Route::get('/dashboard/clients/{year}', [DashboardController::class, 'totalClientRecords'])->name('all.clients');
+    Route::get('/dashboard/warranty/{year}', [DashboardController::class, 'totalWarrantyRecords'])->name('all.clients');
+    Route::get('/dashboard/clients', [DashboardController::class, 'purchasedByClient'])->name('totalPurchasedClients');
+
 });
 
 Route::prefix('sales-consultant')->middleware(['role:sales-consultant'])->group(function () {

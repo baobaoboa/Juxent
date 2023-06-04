@@ -99,7 +99,7 @@ class ProductController extends Controller
     }
     public function search(Request $request)
     {
-        $fields = $request->validate(['client_id', 'required|string']);
+        $fields = $request->validate(['client_id' => 'required|string']);
         if(isset($request->product_purchased)){
             return Product::where('client_id', $fields['client_id'])->where('product_purchase', 'LIKE', '%'.$request->product_purchased.'%')->get();
         }
@@ -107,7 +107,7 @@ class ProductController extends Controller
     }
     public function update(Request $request, $id)
     {
-        $product = product::find($id);
+        $product = Product::find($id);
         $product->update($request->all());
         return $product;
     }

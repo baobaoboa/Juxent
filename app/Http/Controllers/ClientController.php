@@ -57,12 +57,14 @@ class ClientController extends Controller
 
     public function update(Request $request, $id)
     {
+        $client_contact = [];
         $client = Client::find($id);
         $client->update($request->except(['first_name', 'middle_name', 'last_name', 'email', 'contact_number']));
         if(isset($request->first_name) || isset($request->middle_name) || isset($request->last_name) || isset($request->contact_number) || isset($request->email)){
-            $client_contact = ClientContact::find($id);
+            $client_contact = ClientContact::find($client->contact_id);
             $client_contact->update($request->except(['created_by', 'client_name', 'company_address', 'contact_id']));
         }
+        $client->contact = $client_contact;
         return $client;
     }
     public function destroy($id)
