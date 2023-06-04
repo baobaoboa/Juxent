@@ -31,6 +31,7 @@ Route::prefix('operations-manager')->group(function () {
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
     Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
 
     //clients
     Route::post('/clients/search/', [ClientController::class, 'search'])->middleware(['throttle:searchUser'])->name('clients.search');

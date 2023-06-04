@@ -49,6 +49,7 @@ Route::prefix('secretary')->middleware(['role:secretary'])->group(function () {
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
     Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
 
     //clients
     Route::post('/clients/search/', [ClientController::class, 'search'])->middleware(['throttle:searchUser'])->name('clients.search');
@@ -74,14 +75,19 @@ Route::prefix('secretary')->middleware(['role:secretary'])->group(function () {
     Route::get('/records/show/{id}', [ResourceController::class, 'show'])->name('show.record');
 
     //dashboard
-    Route::get('/dashboard/clients/{year}', [DashboardController::class, 'totalClientRecords'])->name('all.clients');
-    Route::get('/dashboard/clients/month/{year}', [DashboardController::class, 'totalClientRecordsByMonth'])->name('all.clients');
-    Route::get('/dashboard/warranty/{year}', [DashboardController::class, 'totalWarrantyRecords'])->name('all.clients');
+    Route::get('/dashboard/clients/{year}', [DashboardController::class, 'totalClientRecords'])->name('clients.byYear');
+    Route::get('/dashboard/clients/month/{year}', [DashboardController::class, 'totalClientRecordsByMonth'])->name('clients.byMonth');
+    Route::get('/dashboard/warranty/{year}', [DashboardController::class, 'totalWarrantyRecords'])->name('warranties.byYear');
+    Route::get('/dashboard/warranty/month/{year}', [DashboardController::class, 'totalWarrantyRecordsByMonth'])->name('warranties.byMonth');
     Route::get('/dashboard/clients', [DashboardController::class, 'purchasedByClient'])->name('totalPurchasedClients');
-
 });
 
 Route::prefix('sales-consultant')->middleware(['role:sales-consultant'])->group(function () {
+    //users
+    Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
+
     //clients
     Route::post('/clients/search/', [ClientController::class, 'search'])->middleware(['throttle:searchUser'])->name('clients.search');
     Route::get('/clients/{id}', [ClientController::class, 'show'])->name('clients.show');
@@ -107,4 +113,11 @@ Route::prefix('sales-consultant')->middleware(['role:sales-consultant'])->group(
     Route::get('/records', [ResourceController::class, 'getRecords'])->name('all.records');
     Route::get('/records/{date}', [ResourceController::class, 'showRecords'])->name('show.records');
     Route::get('/records/show/{id}', [ResourceController::class, 'show'])->name('record.show');
+
+    //dashboard
+    Route::get('/dashboard/clients/{year}', [DashboardController::class, 'totalClientRecords'])->name('clients.byYear');
+    Route::get('/dashboard/clients/month/{year}', [DashboardController::class, 'totalClientRecordsByMonth'])->name('clients.byMonth');
+    Route::get('/dashboard/warranty/{year}', [DashboardController::class, 'totalWarrantyRecords'])->name('warranties.byYear');
+    Route::get('/dashboard/warranty/month/{year}', [DashboardController::class, 'totalWarrantyRecordsByMonth'])->name('warranties.byMonth');
+    Route::get('/dashboard/clients', [DashboardController::class, 'purchasedByClient'])->name('totalPurchasedClients');
 });

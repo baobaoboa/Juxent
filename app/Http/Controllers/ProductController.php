@@ -101,7 +101,7 @@ class ProductController extends Controller
     {
         $fields = $request->validate(['client_id' => 'required|string']);
         if(isset($request->product_purchased)){
-            return Product::where('client_id', $fields['client_id'])->where('product_purchase', 'LIKE', '%'.$request->product_purchased.'%')->get();
+            return Product::where('client_id', $fields['client_id'])->where('product_purchased', 'LIKE', '%'.$request->product_purchased.'%')->get();
         }
         return "";
     }

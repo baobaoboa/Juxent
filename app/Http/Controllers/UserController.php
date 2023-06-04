@@ -90,6 +90,7 @@ class UserController extends Controller
         return User::whereNull('deleted_at')
             ->where('id', $id)
             ->with('createdBy')
+            ->with('role')
             ->first();
     }
 

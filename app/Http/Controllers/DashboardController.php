@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     public function totalClientRecords($year){
-
         $software_types = SoftwareType::all()->pluck('software_type');
         $result = SoftwareType::all()->pluck('software_type')->mapWithKeys(function ($item) {
             return [$item => 0];
@@ -26,15 +25,15 @@ class DashboardController extends Controller
     public function totalWarrantyRecords() {
         $now = Carbon::now()->subYear();
         $result = [];
-        $result['inactive'] = 0;
-        $result['active'] = Warranty::where('starting_date_of_warranty_availed', '>=', $now)->get()->groupBy('product_id')->count();
-        $result['expired']= Warranty::where('starting_date_of_warranty_availed', '<', $now)->get()->groupBy('product_id')->count();
+        $result['Inactive'] = 0;
+        $result['Active'] = Warranty::where('starting_date_of_warranty_availed', '>=', $now)->get()->groupBy('product_id')->count();
+        $result['Expired']= Warranty::where('starting_date_of_warranty_availed', '<', $now)->get()->groupBy('product_id')->count();
         Warranty::where('starting_date_of_warranty_availed', '>=', $now)
             ->get()
             ->groupBy('product_id')
             ->map(function ($warranties) use (&$result) {
                 $inactiveCount = $warranties->count() - 1;
-                $result['inactive'] += $inactiveCount;
+                $result['Inactive'] += $inactiveCount;
                 return $inactiveCount;
             });
         return response($result, 200);
@@ -59,6 +58,27 @@ class DashboardController extends Controller
 
         $data = Product::selectRaw('MONTH(date_of_purchase) as month, COUNT(*) as count')
             ->whereYear('date_of_purchase', $year)
+            ->groupBy('month')
+            ->get();
+
+        $result = array_fill_keys($months, 0);
+
+        foreach ($data as $row) {
+            $monthName = date('F', mktime(0, 0, 0, $row->month, 1));
+            $result[$monthName] = $row->count;
+        }
+
+        return response()->json($result);
+    }
+
+    public function totalWarrantyRecordsByMonth($year) {
+        $months = [
+            'January', 'February', 'March', 'April', 'May', 'June', 'July',
+            'August', 'September', 'October', 'November', 'December'
+        ];
+
+        $data = Warranty::selectRaw('MONTH(starting_date_of_warranty_availed) as month, COUNT(*) as count')
+            ->whereYear('starting_date_of_warranty_availed', $year)
             ->groupBy('month')
             ->get();
 
