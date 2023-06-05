@@ -21,6 +21,7 @@ Route::prefix('operations-manager')->middleware(['role:operations-manager'])->gr
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
 
     //clients
+    Route::get('/clients', [ClientController::class, 'index'])->middleware(['throttle:searchUser'])->name('index.clients');
     Route::post('/clients/search/', [ClientController::class, 'search'])->middleware(['throttle:searchUser'])->name('clients.search');
     Route::get('/clients/{id}', [ClientController::class, 'show'])->name('clients.show');
     Route::delete('/clients/{id}', [ClientController::class, 'destroy'])->name('clients.destroy');
