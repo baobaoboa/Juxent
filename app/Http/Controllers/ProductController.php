@@ -128,6 +128,6 @@ class ProductController extends Controller
         return Product::whereBetween('created_at', [$from, $to])->orWhereBetween('created_at', [$from, $to])->with('product')->paginate(25);
     }
     public function show($id){
-        return Product::where('id', $id)->with('warranties')->with('user')->with('client')->with('softwareType')->with('productType')->first();
+        return Product::where('id', $id)->with('warranties')->with('client')->with('softwareType')->with('productType')->first();
     }
 }

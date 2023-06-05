@@ -94,9 +94,8 @@ class WarrantyController extends Controller
         return response($warranty, 201);
     }
 
-    public function show($date)
-    {
-
+    public function show($id){
+        return Warranty::where('id', $id)->with('product')->first();
     }
 
     public function update(Request $request, $id)
@@ -107,7 +106,7 @@ class WarrantyController extends Controller
     }
     public function destroy($id)
     {
-        $warranty = warranty::where('id', $id)->first();
+        $warranty = Warranty::where('id', $id)->first();
         $warranty->deleted_at = date('Y-m-d h:m:s', Carbon::now());
         return $warranty;
     }

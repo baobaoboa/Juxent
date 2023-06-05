@@ -28,6 +28,7 @@ Route::prefix('operations-manager')->middleware(['role:operations-manager'])->gr
 
     //warranties
     Route::get('/warranties', [WarrantyController::class, 'index'])->name('all.warranties');
+    Route::get('/warranties/{id}', [WarrantyController::class, 'show'])->name('show.warranty');
     Route::put('/warranties/{id}', [WarrantyController::class, 'update'])->name('warranty.update');
     Route::delete('/warranties/{id}', [WarrantyController::class, 'destroy'])->name('warranty.destroy');
     Route::get('/warranties', [WarrantyController::class, 'index'])->name('warranty.index');
@@ -59,6 +60,7 @@ Route::prefix('secretary')->middleware(['role:secretary'])->group(function () {
 
     //warranties
     Route::get('/warranties', [WarrantyController::class, 'index'])->name('all.warranties');
+    Route::get('/warranties/{id}', [WarrantyController::class, 'show'])->name('show.warranty');
     Route::put('/warranties/{id}', [WarrantyController::class, 'update'])->name('warranty.update');
     Route::delete('/warranties/{id}', [WarrantyController::class, 'destroy'])->name('warranty.destroy');
     Route::get('/warranties', [WarrantyController::class, 'index'])->name('warranty.index');
@@ -97,6 +99,7 @@ Route::prefix('sales-consultant')->middleware(['role:sales-consultant'])->group(
 
     //warranties
     Route::get('/warranties', [WarrantyController::class, 'index'])->name('warranty.index');
+    Route::get('/warranties/{id}', [WarrantyController::class, 'show'])->name('show.warranty');
     Route::put('/warranties/{id}', [WarrantyController::class, 'update'])->name('warranty.update');
     Route::delete('/warranties/{id}', [WarrantyController::class, 'destroy'])->name('warranty.destroy');
     Route::post('/warranties', [WarrantyController::class, 'store'])->name('warranty.store');
